@@ -4,14 +4,6 @@ import { TOP, BOTTOM } from '../enums/axis-orientation';
 import { calculateBandSpace, setOffset } from './helper';
 
 export default class BandAxis extends SimpleAxis {
-
-    /**
-     *
-     *
-     * @param {*} range
-     * @returns
-     * @memberof BandAxis
-     */
     createScale (range) {
         const scale = super.createScale(range);
         const { padding } = this.config();
@@ -21,26 +13,10 @@ export default class BandAxis extends SimpleAxis {
         return scale;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof BandAxis
-     */
     static type () {
         return BAND;
     }
 
-    /**
-     *
-     *
-     * @param {*} width
-     * @param {*} height
-     * @param {*} padding
-     * @param {*} isOffset
-     * @memberof BandAxis
-     */
     setAvailableSpace (width, height, padding, isOffset) {
         const {
             left,
@@ -72,22 +48,10 @@ export default class BandAxis extends SimpleAxis {
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof BandAxis
-     */
     getUnitWidth () {
         return this.scale().bandwidth();
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof BandAxis
-     */
     setTickConfig () {
         let smartTicks = '';
         let smartlabel;
@@ -109,7 +73,7 @@ export default class BandAxis extends SimpleAxis {
         return smartTicks;
     }
 
-/**
+    /**
      * Gets the space occupied by the axis
      *
      * @return {Object} object with details about size of the axis.
@@ -123,14 +87,7 @@ export default class BandAxis extends SimpleAxis {
         }
         return this.logicalSpace();
     }
-    /**
-     *
-     *
-     * @param {*} axisTickLabels
-     * @param {*} labelWidth
-     * @returns
-     * @memberof BandAxis
-     */
+
     setRotationConfig (axisTickLabels, labelWidth) {
         const { orientation } = this.config();
         const range = this.range();
@@ -151,22 +108,10 @@ export default class BandAxis extends SimpleAxis {
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof BandAxis
-     */
     getTickValues () {
         return this.axis().scale().domain();
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     getTickSize () {
         const {
             showInnerTicks,
@@ -183,6 +128,8 @@ export default class BandAxis extends SimpleAxis {
      * This method is used to assign a domain to the axis.
      *
      * @param {Array} domain the domain of the scale
+     *
+     * @return {BandAxis} Instance of band axis.
      * @memberof SimpleAxis
      */
     updateDomainBounds (domain) {
@@ -201,6 +148,7 @@ export default class BandAxis extends SimpleAxis {
 
     /**
      * Returns the value from the domain when given a value from the range.
+     *
      * @param {number} value Value from the range.
      * @return {number} Value
      */

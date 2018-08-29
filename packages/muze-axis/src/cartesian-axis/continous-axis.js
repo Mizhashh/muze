@@ -16,13 +16,6 @@ export const interpolatorMap = {
 };
 
 export default class ContinousAxis extends SimpleAxis {
-
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     createScale (config) {
         const {
             base,
@@ -49,6 +42,7 @@ export default class ContinousAxis extends SimpleAxis {
      * This method is used to assign a domain to the axis.
      *
      * @param {Array} domain the domain of the scale
+     * @return {ContinousAxis} Instance of continous axis.
      * @memberof SimpleAxis
      */
     updateDomainBounds (domain) {
@@ -67,13 +61,6 @@ export default class ContinousAxis extends SimpleAxis {
         return this.domain(currentDomain);
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof ContinousAxis
-     */
     static type () {
         return LINEAR;
     }
@@ -84,12 +71,7 @@ export default class ContinousAxis extends SimpleAxis {
         }
         return this._interpolator.getScaleValue(domainVal);
     }
- /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
+
     getTickSize () {
         const {
             showInnerTicks,
@@ -101,13 +83,6 @@ export default class ContinousAxis extends SimpleAxis {
         return axis.tickSize();
     }
 
-    /**
-     *
-     *
-     * @param {*} d
-     * @returns
-     * @memberof SimpleAxis
-     */
     domain (domain) {
         if (domain && domain.length) {
             const { nice } = this.config();
@@ -129,7 +104,11 @@ export default class ContinousAxis extends SimpleAxis {
      *
      * @param {number} width The width of SimpleCell.
      * @param {number} height The height of SimpleCell.
-     * @memberof AxisCell
+     * @param {Object} padding Axis padding.
+     * @param {boolean} isOffset Should offset to be added in the axis.
+     *
+     * @return {ContinousAxis} Instance of continous axis.
+     * @memberof SimpleAxis
      */
     setAvailableSpace (width = 0, height, padding, isOffset) {
         const {
@@ -159,13 +138,6 @@ export default class ContinousAxis extends SimpleAxis {
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} tickValues
-     * @returns
-     * @memberof SimpleAxis
-     */
     setTickValues () {
         const {
             tickValues
@@ -180,12 +152,6 @@ export default class ContinousAxis extends SimpleAxis {
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     getTickValues () {
         let labelDim = 0;
         const {
@@ -211,13 +177,6 @@ export default class ContinousAxis extends SimpleAxis {
         return getSmallestDiff(this.config().tickValues);
     }
 
-    /**
-     *
-     *
-     * @param {*} domain
-     * @returns
-     * @memberof SimpleAxis
-     */
     updateDomainCache (domain) {
         if (this._domainLock === false) {
             this._domain = [];
@@ -226,14 +185,6 @@ export default class ContinousAxis extends SimpleAxis {
         return this.updateDomainBounds(domain || []);
     }
 
-    /**
-     * Sets a fixed baseline for the first ticks so that they can render effectively within
-     * the given area
-     *
-     * @param {*} tickText
-     * @param {*} config
-     * @param {*} labelManager
-     */
     setFixedBaseline (tickText) {
         const {
             orientation,

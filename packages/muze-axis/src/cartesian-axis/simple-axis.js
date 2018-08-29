@@ -20,11 +20,6 @@ import {
 import { PROPS } from './props';
 
 export default class SimpleAxis {
-
-    /**
-     * Creates an instance of SimpleAxis.
-     * @memberof SimpleAxis
-     */
     constructor (config, dependencies) {
         this._id = getUniqueId();
 
@@ -64,30 +59,17 @@ export default class SimpleAxis {
 
     /**
      * Returns the default configuration of simple axis
-     *  @return {Object} default configurations
+     *
+     * @return {Object} default configurations
      */
     static defaultConfig () {
         return defaultConfig;
     }
 
-    /**
-     * Sets a fixed baseline for the first ticks so that they can render effectively within
-     * the given area
-     *
-     * @param {*} tickText
-     * @param {*} config
-     * @param {*} labelManager
-     */
     setFixedBaseline () {
         return this;
     }
 
-    /**
-     *
-     *
-     * @readonly
-     * @memberof SimpleAxis
-     */
     scale (...params) {
         if (params.length) {
             this._scale = params[0];
@@ -96,12 +78,6 @@ export default class SimpleAxis {
         return this._scale;
     }
 
-    /**
-     *
-     *
-     * @readonly
-     * @memberof SimpleAxis
-     */
     axis (...params) {
         if (params.length) {
             this._axis = params[0];
@@ -110,13 +86,6 @@ export default class SimpleAxis {
         return this._axis;
     }
 
-    /**
-     *
-     *
-     * @param {*} d
-     * @returns
-     * @memberof SimpleAxis
-     */
     domain (...domain) {
         if (domain.length) {
             this.scale().domain(domain[0]);
@@ -129,22 +98,10 @@ export default class SimpleAxis {
         return this._domain;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     dependencies () {
         return this._dependencies;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     createScale (config) {
         const {
             base,
@@ -165,12 +122,6 @@ export default class SimpleAxis {
         return scale;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     createAxis (config) {
         const {
             tickFormat,
@@ -194,23 +145,10 @@ export default class SimpleAxis {
         return null;
     }
 
-    /**
-     *
-     *
-     * @memberof SimpleAxis
-     */
     setTickConfig () {
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} axisTickLabels
-     * @param {*} labelWidth
-     * @returns
-     * @memberof SimpleAxis
-     */
     setRotationConfig (axisTickLabels, labelWidth) {
         const { orientation } = this.config();
 
@@ -225,12 +163,6 @@ export default class SimpleAxis {
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     adjustRange () {
         return this;
     }
@@ -242,12 +174,6 @@ export default class SimpleAxis {
         return this.scale()(domainVal);
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     getTickSize () {
         return this.axis().tickSize();
     }
@@ -280,7 +206,9 @@ export default class SimpleAxis {
 
     /**
      * Returns the value from the domain when given a value from the range.
+     *
      * @param {number} value Value from the range.
+     *
      * @return {number} Value
      */
     invert (...value) {
@@ -290,8 +218,10 @@ export default class SimpleAxis {
 
     /**
      * Gets the nearest range value from the given range values.
+     *
      * @param {number} v1 Start range value
      * @param {number} v2 End range value
+     *
      * @return {Array} range values
      */
     getNearestRange (v1, v2) {
@@ -318,6 +248,8 @@ export default class SimpleAxis {
      * This method is used to assign a domain to the axis.
      *
      * @param {Array} domain the domain of the scale
+     *
+     * @return {SimpleAxis} Instance of simple axis.
      * @memberof SimpleAxis
      */
     updateDomainBounds (domain) {
@@ -336,13 +268,6 @@ export default class SimpleAxis {
         return this.domain(currentDomain);
     }
 
-    /**
-     *
-     *
-     * @param {*} domain
-     * @returns
-     * @memberof SimpleAxis
-     */
     updateDomainCache (domain) {
         if (this._domainLock === false) {
             this.domain([]);
@@ -355,13 +280,6 @@ export default class SimpleAxis {
         return this.domain();
     }
 
-    /**
-     *
-     *
-     * @param {*} tickValues
-     * @returns
-     * @memberof SimpleAxis
-     */
     setTickValues () {
         const {
             tickValues
@@ -404,6 +322,7 @@ export default class SimpleAxis {
 
     /**
      * Returns the id of the axis.
+     *
      * @return {string} Unique identifier of the axis.
      */
     get id () {
@@ -414,12 +333,6 @@ export default class SimpleAxis {
         this._eventList.push({ name: event, action: fn });
     }
 
-    /**
-     *
-     *
-     * @param {*} fn
-     * @memberof SimpleAxis
-     */
     on (event, fn) {
         event = event || 'update';
         this.registerEvent(event, fn);
@@ -430,6 +343,7 @@ export default class SimpleAxis {
      * the supplied svg container.
      *
      * @param {SVGElement} svg the svg element in which to render the path
+     * @return {SimpleAxis} Instance of simple axis.
      * @memberof SimpleAxis
      */
     /* istanbul ignore next */render () {
@@ -439,45 +353,22 @@ export default class SimpleAxis {
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     remove () {
         this.store().unsubscribeAll();
         selectElement(this.mount()).remove();
         return this;
     }
 
-    /**
-     *
-     *
-     * @memberof SimpleAxis
-     */
     unsubscribe () {
         this.store().unsubscribeAll();
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     isReverse () {
         const range = this.range();
         return range[0] > range[1];
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     getPixelToValueRatio () {
         const scale = this.scale();
         const range = scale.range();

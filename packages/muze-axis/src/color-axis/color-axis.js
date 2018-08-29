@@ -1,7 +1,6 @@
 /**
  * @module Axis
- * This file declares a class that is used to render an axis to add  meaning to
- * plots.
+ * This file declares a class that is used to render an axis to add  meaning to plots.
  */
 import { getUniqueId, generateGetterSetters, rgbToHsv } from 'muze-utils';
 import { createScale, getScheme, getSchemeType } from '../scale-creator';
@@ -18,6 +17,7 @@ export default class ColorAxis {
 
     /**
     * Creates an instance of SimpleAxis.
+    *
     * @param {Object} config input parameters.
     * @param {Object | undefined} params.range Type of color range.
     * @param {string} params.name the label to show on axis.
@@ -41,35 +41,14 @@ export default class ColorAxis {
         this.updateDomain(config.domain);
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof ColorAxis
-     */
     static defaultConfig () {
         return DEFAULT_CONFIG;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof ColorAxis
-     */
     static type () {
         return COLOR;
     }
 
-    /**
-     *
-     *
-     * @param {*} colorStrategy
-     * @returns
-     * @memberof ColorAxis
-     */
     createScale (colorStrategy) {
         const { range } = this.config();
         if (range && typeof (range) === 'string') {
@@ -81,48 +60,20 @@ export default class ColorAxis {
         });
     }
 
-    /**
-     *
-     *
-     * @param {*} domainType
-     * @param {*} rangeType
-     * @param {*} schemeType
-     * @returns
-     * @memberof ColorAxis
-     */
     setColorStrategy (domainType, rangeType, schemeType) {
         const { stops } = this.config();
 
         return strategyGetter(domainType, rangeType, schemeType, stops);
     }
 
-    /**
-     *
-     *
-     * @param {*} domainVal
-     * @returns
-     * @memberof ColorAxis
-     */
     getHslString (hslColorArray) {
         return getHslString(hslColorArray);
     }
-    /**
-     *
-     *
-     * @param {*} domainVal
-     * @returns
-     * @memberof ColorAxis
-     */
+
     getColor (domainVal) {
         return this.getHslString(this.getRawColor(domainVal));
     }
-    /**
-     *
-     *
-     * @param {*} domainVal
-     * @returns
-     * @memberof ColorAxis
-     */
+
     getRawColor (domainVal) {
         if (this.domain() && domainVal !== undefined) {
             const scale = this.scale();
@@ -140,13 +91,6 @@ export default class ColorAxis {
         return [...this.config().value];
     }
 
-    /**
-     *
-     *
-     * @param {*} [domain=[]]
-     * @returns
-     * @memberof ColorAxis
-     */
     updateDomain (domain = []) {
         if (domain.length) {
             const scale = this.scale();
@@ -163,8 +107,7 @@ export default class ColorAxis {
     }
 
     /**
-     * This method returns an object that can be used to
-     * reconstruct this instance.
+     * This method returns an object that can be used to reconstruct this instance.
      *
      * @return {Object} the serializable props of axis
      * @memberof ShapeAxis
@@ -197,6 +140,7 @@ export default class ColorAxis {
 
     /**
      * Returns the id of the axis.
+     *
      * @return {string} Unique identifier of the axis.
      */
     id () {

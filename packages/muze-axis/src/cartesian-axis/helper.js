@@ -24,12 +24,6 @@ export const sanitizeDomain = (domain, context) => {
     return domain;
 };
 
-/**
- *
- *
- * @returns
- * @memberof SimpleAxis
- */
 export const getTickLabelInfo = (context) => {
     let largestLabel = '';
     let labelProps;
@@ -72,12 +66,6 @@ export const getTickLabelInfo = (context) => {
     return { largestLabel, largestLabelDim: labelProps, axisTickLabels, allLabelLengths, smartTick };
 };
 
-/**
- *
- *
- * @returns
- * @memberof SimpleAxis
- */
 export const computeAxisDimensions = (context) => {
     let tickLabelDim = {};
     const {
@@ -122,11 +110,6 @@ export const computeAxisDimensions = (context) => {
     };
 };
 
-/**
-*
-*
-* @memberof SimpleAxis
-*/
 export const setOffset = (context) => {
     let x = 0;
     let y = 0;
@@ -146,14 +129,6 @@ export const setOffset = (context) => {
     context.config({ xOffset: x, yOffset: y });
 };
 
-/**
- *
- *
- * @param {*} timeDiff
- * @param {*} range
- * @param {*} domain
- * @returns
- */
 const getAxisOffset = (timeDiff, range, domain) => {
     const pvr = Math.abs(range[1] - range[0]) / (domain[1] - domain[0]);
     const width = (pvr * timeDiff);
@@ -178,12 +153,6 @@ export const adjustRange = (minDiff, range, domain, orientation) => {
     return range;
 };
 
- /**
- * Listener attached to the axis on change of parameters.
- *
- * @param {Function} callback to be excuted on change of domain range etc
- * @memberof SimpleAxis
- */
 export const registerChangeListeners = (context) => {
     const store = context.store();
 
@@ -197,14 +166,6 @@ export const registerChangeListeners = (context) => {
     return context;
 };
 
-/**
- *
- *
- * @param {*} axisDimensions
- * @param {*} config
- * @param {*} range
- * @returns
- */
 export const getHorizontalAxisSpace = (context, axisDimensions, config, range) => {
     let width;
     let height;
@@ -243,14 +204,6 @@ export const getHorizontalAxisSpace = (context, axisDimensions, config, range) =
     };
 };
 
-/**
- *
- *
- * @param {*} axisDimensions
- * @param {*} config
- * @param {*} range
- * @returns
- */
 export const getVerticalAxisSpace = (context, axisDimensions, config) => {
     let height;
     let width;
@@ -284,10 +237,6 @@ export const getVerticalAxisSpace = (context, axisDimensions, config) => {
     };
 };
 
- /**
-     * Calculates the logical space of the axis
-     * @return {Object} Width and height occupied by the axis.
-     */
 export const calculateBandSpace = (context) => {
     const range = context.range();
     const config = context.config();
@@ -331,10 +280,6 @@ export const calculateBandSpace = (context) => {
     };
 };
 
-/**
-     * Calculates the logical space of the axis
-     * @return {Object} Width and height occupied by the axis.
-     */
 export const calculateContinousSpace = (context) => {
     const range = context.range();
     const config = context.config();

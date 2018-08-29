@@ -4,27 +4,12 @@ import { TIME } from '../enums/scale-type';
 import { axisOrientationMap, BOTTOM, TOP } from '../enums/axis-orientation';
 import { DOMAIN } from '../enums/constants';
 
-/**
- *
- *
- * @export
- * @class TimeAxis
- * @extends {SimpleAxis}
- */
 export default class TimeAxis extends SimpleAxis {
-
     constructor (...params) {
         super(...params);
         this._minDiff = Infinity;
     }
 
-    /**
-     *
-     *
-     * @param {*} range
-     * @returns
-     * @memberof TimeAxis
-     */
     createScale (range) {
         let scale = super.createScale(range);
 
@@ -32,23 +17,10 @@ export default class TimeAxis extends SimpleAxis {
         return scale;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof TimeAxis
-     */
     static type () {
         return TIME;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof BandAxis
-     */
     setTickConfig () {
         let smartTicks;
         let smartlabel;
@@ -69,12 +41,6 @@ export default class TimeAxis extends SimpleAxis {
         return smartTicks;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     createAxis (config) {
         const {
             tickFormat,
@@ -94,12 +60,6 @@ export default class TimeAxis extends SimpleAxis {
         return null;
     }
 
-     /**
-     *
-     *
-     * @returns
-     * @memberof SimpleAxis
-     */
     getTickSize () {
         const {
             showInnerTicks,
@@ -111,36 +71,15 @@ export default class TimeAxis extends SimpleAxis {
         return super.getTickSize();
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof TimeAxis
-     */
     getTickValues () {
         return this.scale().ticks();
     }
 
-    /**
-     *
-     *
-     * @param {*} diff
-     * @returns
-     * @memberof TimeAxis
-     */
     minDiff (diff) {
         this._minDiff = Math.min(this._minDiff, diff);
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} axisTickLabels
-     * @param {*} labelWidth
-     * @returns
-     * @memberof BandAxis
-     */
     setRotationConfig (axisTickLabels, labelWidth) {
         const { orientation } = this.config();
         const range = this.range();
@@ -160,13 +99,6 @@ export default class TimeAxis extends SimpleAxis {
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} d
-     * @returns
-     * @memberof SimpleAxis
-     */
     domain (domain) {
         if (domain) {
             const { nice } = this.config();
@@ -184,15 +116,6 @@ export default class TimeAxis extends SimpleAxis {
         } return this._domain;
     }
 
-    /**
-     *
-     *
-     * @param {*} width
-     * @param {*} height
-     * @param {*} padding
-     * @param {*} isOffset
-     * @memberof TimeAxis
-     */
     setAvailableSpace (width, height, padding, isOffset) {
         const {
             left,

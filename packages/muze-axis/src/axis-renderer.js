@@ -5,14 +5,6 @@ import { selectElement, makeElement, angleToRadian } from 'muze-utils';
 import * as AxisOrientation from './enums/axis-orientation';
 import { LINEAR, HIDDEN, BOTTOM, TOP } from './enums/constants';
 
-/**
- *
- *
- * @param {*} instance
- * @param {*} container
- * @param {*} labelManager
- * @param {*} config
- */
 const rotateAxis = (instance, tickText, labelManager, config) => {
     const axis = instance.axis();
     const scale = instance.scale();
@@ -63,24 +55,18 @@ const rotateAxis = (instance, tickText, labelManager, config) => {
         if (orientation === AxisOrientation.TOP) {
             xShift = (index === 0 && fixedBaseline && type === LINEAR) ? xShift + xShift / 2 : xShift;
             selectElement(this)
-                            .attr('transform', `translate(${-xShift + tickSize} 
+                            .attr('transform', `translate(${-xShift + tickSize}
                                 ${-yShift - tickSize}) rotate(${rotation})`);
         } else {
             xShift = (index === 0 && fixedBaseline && type === LINEAR) ? xShift - xShift / 2 : xShift;
             selectElement(this)
-                            .attr('transform', `translate(${xShift - tickSize} 
+                            .attr('transform', `translate(${xShift - tickSize}
                                 ${yShift + tickSize}) rotate(${rotation})`);
         }
     });
     return tickText;
 };
 
-/**
- *
- *
- * @param {*} tickText
- * @param {*} axisInstance
- */
 const changeTickOrientation = (selectContainer, axisInstance, tickSize) => {
     const {
         _smartTicks
@@ -136,13 +122,6 @@ const setFixedBaseline = (axisInstance) => {
     }
 };
 
-/**
- *
- *
- * @param {*} textNode
- * @param {*} orientation
- * @param {*} measures
- */
 const setAxisNamePos = (textNode, orientation, measures) => {
     const {
         axisNameHeight,
@@ -173,8 +152,7 @@ const setAxisNamePos = (textNode, orientation, measures) => {
 };
 
 /**
- * This method is used to render the axis inside an
- * svg container.
+ * This method is used to render the axis inside an svg container.
  *
  * @export
  * @param {Object} axisInstance the nput object required to render axis

@@ -1,10 +1,6 @@
 import { getUniqueId } from 'muze-utils';
 import { CLASSPREFIX } from '../enums/constants';
 
-/**
- *
- *
- */
 export const defaultConfig = {
     id: getUniqueId(),
     axisName: {

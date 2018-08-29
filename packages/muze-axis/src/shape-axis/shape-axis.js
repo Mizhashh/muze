@@ -1,7 +1,6 @@
 /**
  * @module Axis
- * This file declares a class that is used to render an axis to add  meaning to
- * plots.
+ * This file declares a class that is used to render an axis to add meaning to plots.
  */
 import { getUniqueId, getSymbol, generateGetterSetters, mergeRecursive } from 'muze-utils';
 import { createScale } from '../scale-creator';
@@ -17,8 +16,8 @@ import { PROPS } from './props';
 export default class ShapeAxis {
     /**
     * Creates an instance of SimpleAxis.
-    * @param {Object} params input parameters.
-    * @param {Object | undefined} params.range Type of color scheme.
+    *
+    * @param {Object} config Configuration of shape axis.
     * @memberof ShapeAxis
     */
     constructor (config) {
@@ -35,35 +34,14 @@ export default class ShapeAxis {
         this.updateDomain(config.domain);
     }
 
-     /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof ColorAxis
-     */
     static defaultConfig () {
         return DEFAULT_CONFIG;
     }
 
-     /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof ColorAxis
-     */
     static type () {
         return SHAPE;
     }
 
-    /**
-     *
-     *
-     * @param {*} value
-     * @returns
-     * @memberof ShapeAxis
-     */
     getShape (value) {
         if (!this.scale() || !this.domain() || !value) {
             return this.config().value;
@@ -85,6 +63,7 @@ export default class ShapeAxis {
      * This method is used to assign a domain to the axis.
      *
      * @param {Array} domain the domain of the scale
+     * @return {ShapeAxis} Instance of shape axis.
      * @memberof ShapeAxis
      */
     updateDomain (domain = []) {
@@ -101,8 +80,7 @@ export default class ShapeAxis {
     }
 
     /**
-     * This method returns an object that can be used to
-     * reconstruct this instance.
+     * This method returns an object that can be used to reconstruct this instance.
      *
      * @return {Object} the serializable props of axis
      * @memberof ShapeAxis
@@ -119,6 +97,7 @@ export default class ShapeAxis {
 
     /**
      * Returns the id of the axis.
+     *
      * @return {string} Unique identifier of the axis.
      */
     id () {

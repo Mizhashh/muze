@@ -1,7 +1,6 @@
 /**
  * @module Axis
- * This file declares a class that is used to render an axis to add  meaning to
- * plots.
+ * This file declares a class that is used to render an axis to add  meaning to plots.
  */
 import { getUniqueId, generateGetterSetters } from 'muze-utils';
 import { createScale } from '../scale-creator';
@@ -11,11 +10,11 @@ import { strategyGetter } from './size-strategy';
 import { PROPS } from './props';
 
 /**
-* This class is used to instantiate a SimpleAxis.
+* This class is used to instantiate a SizeAxis.
+*
 * @class SimpleAxis
 */
 export default class SizeAxis {
-
     /**
      * Creates an instance of SimpleAxis.
      * @param {Object} config input parameters.
@@ -37,25 +36,10 @@ export default class SizeAxis {
         this.updateDomain(config.domain);
     }
 
-     /**
-     *
-     *
-     * @param {*} domainType
-     * @param {*} rangeType
-     * @param {*} schemeType
-     * @returns
-     * @memberof ColorAxis
-     */
     setStrategy (domainType, rangeType) {
         return strategyGetter(domainType, rangeType);
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof SizeAxis
-     */
     createScale (strategy) {
         const {
             range
@@ -66,35 +50,14 @@ export default class SizeAxis {
         });
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof ColorAxis
-     */
     static defaultConfig () {
         return DEFAULT_CONFIG;
     }
 
-     /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof ColorAxis
-     */
     static type () {
         return SIZE;
     }
 
-    /**
-     *
-     *
-     * @param {*} domainVal
-     * @returns
-     * @memberof SizeAxis
-     */
     getSize (domainVal = 0) {
         let sizeVal = 1;
         const {
@@ -111,12 +74,6 @@ export default class SizeAxis {
         return sizeVal;
     }
 
-    /**
-     * This method is used to assign a domain to the axis.
-     *
-     * @param {Array} domain the domain of the scale
-     * @memberof SizeAxis
-     */
     updateDomain (domain) {
         if (domain) {
             const domainFn = this._sizeStrategy.domain;
@@ -150,6 +107,7 @@ export default class SizeAxis {
 
     /**
      * Returns the id of the axis.
+     *
      * @return {string} Unique identifier of the axis.
      */
     id () {

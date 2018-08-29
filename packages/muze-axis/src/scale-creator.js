@@ -61,13 +61,6 @@ export function getScheme (scheme) {
     return scaleOrdinal(colorSchemes[scheme]);
 }
 
-/**
- *
- *
- * @export
- * @param {*} scheme
- * @returns
- */
 export function getSchemeType (scheme) {
     let schemeType = '';
     if (scheme && typeof (scheme) === 'string') {
@@ -129,15 +122,6 @@ export function updateScaleRange (scale, range) {
     return scale.range(range);
 }
 
-/**
- *
- *
- * @export
- * @param {*} domainType
- * @param {*} rangeType
- * @param {*} steps
- * @returns
- */
 export function getScaleType (domainType, rangeType, steps) {
     if (rangeType === CONTINOUS) {
         return LINEAR;
