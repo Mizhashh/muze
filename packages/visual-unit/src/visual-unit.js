@@ -105,13 +105,6 @@ export default class VisualUnit {
         registerListeners(this, listenerMap);
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof VisualUnit
-     */
     static formalName () {
         return FORMAL_NAME;
     }
@@ -129,12 +122,6 @@ export default class VisualUnit {
         return new this(...params);
     }
 
-    /**
-     *
-     *
-     * @readonly
-     * @memberof VisualUnit
-     */
     firebolt (...firebolt) {
         if (firebolt.length) {
             this._firebolt = firebolt[0];
@@ -159,23 +146,11 @@ export default class VisualUnit {
         return this._id;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof VisualUnit
-     */
     lockModel () {
         this._store.model.lock();
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof VisualUnit
-     */
     unlockModel () {
         this._store.model.unlock();
         return this;
@@ -183,6 +158,7 @@ export default class VisualUnit {
 
     /**
      * Renders the visual unit. It creates the layout and renders the axes and layers.
+     *
      * @return {VisualUnit} Instance of visual unit.
      */
     render (container) {
@@ -214,35 +190,18 @@ export default class VisualUnit {
     done () {
         return this._renderedPromise;
     }
-    /**
-     *
-     *
-     * @returns
-     * @memberof VisualUnit
-     */
+
     enableCaching () {
         this._cache = true;
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof VisualUnit
-     */
     clearCaching () {
         this._cache = false;
         this.cachedData([this.cachedData()[0]]);
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof VisualUnit
-     */
     getDrawingContext () {
         const rootSvg = this._rootSvg && this._rootSvg.node();
         const width = this.width();
@@ -271,13 +230,6 @@ export default class VisualUnit {
         };
     }
 
-    /**
-     *
-     *
-     * @param {*} layerDef
-     * @returns
-     * @memberof VisualUnit
-     */
     addLayer (layerDef) {
         const layerName = layerDef.name;
         const layer = this.getLayerByName(layerName);
@@ -304,12 +256,6 @@ export default class VisualUnit {
         return instances;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof VisualUnit
-     */
     remove () {
         const lifeCycleManager = this._dependencies.lifeCycleManager;
         lifeCycleManager.notify({ client: this, action: 'beforeremove', formalName: 'unit' });
@@ -324,13 +270,6 @@ export default class VisualUnit {
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} identifiers
-     * @returns
-     * @memberof VisualUnit
-     */
     getDataModelFromIdentifiers (identifiers, mode, parentModel) {
         if (identifiers === null) {
             return null;
@@ -339,23 +278,11 @@ export default class VisualUnit {
         return getDataModelFromIdentifiers(dataModel, identifiers, mode);
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof VisualUnit
-     */
     resetData () {
         this.data(this.cachedData()[0]);
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof VisualUnit
-     */
     getSourceInfo () {
         return {
             dimensionMeasureMap: this._dimensionMeasureMap,
@@ -365,54 +292,28 @@ export default class VisualUnit {
         };
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof VisualUnit
-     */
     getDefaultTargetContainer () {
         const { classPrefix, defClassName, arcLayerClassName } = this.config();
         return [`.${classPrefix}-${defClassName}`, `.${classPrefix}-${arcLayerClassName} path`];
     }
 
-    /**
-     *
-     *
-     * @param {*} type
-     * @returns
-     * @memberof VisualUnit
-     */
     getLayersByType (type) {
         const layers = getLayersBy(this.layers(), 'type', type);
         return layers;
     }
 
-    /**
-     *
-     *
-     * @param {*} name
-     * @returns
-     * @memberof VisualUnit
-     */
     getLayerByName (name) {
         const layers = getLayersBy(this.layers(), 'name', name);
         return layers[0];
     }
 
-    /**
-     *
-     *
-     * @param {*} domain
-     * @returns
-     * @memberof VisualUnit
-     */
     updateAxisDomain (domain) {
         ['x', 'y'].forEach((type) => {
             const axes = this.axes()[type];
             let min = [];
             let max = [];
             let dom;
+
             axes && axes.forEach((axis, i) => {
                 const field = this.fields()[type][i];
                 dom = domain[`${this.fields()[type][i]}`];
@@ -422,6 +323,7 @@ export default class VisualUnit {
                     max[i] = dom[1];
                 }
             });
+
             if (axes) {
                 if (axes.length > 1) {
                     const axisConf = axes[0].config();
@@ -479,9 +381,10 @@ export default class VisualUnit {
     }
 
     getMarkInfFromLayers (x, y, args) {
+        let point = null;
         const layers = this.layers();
         const len = layers.length;
-        let point = null;
+
         // Iterate through the layers array and fetch the nearest point from each layer. If a valid
         // nearest point is found from any layer, then return that point.
         for (let i = 0; i < len; i++) {
@@ -497,13 +400,6 @@ export default class VisualUnit {
         return point;
     }
 
-    /**
-     *
-     *
-     * @param {*} identifiers
-     * @returns
-     * @memberof VisualUnit
-     */
     getPlotPointsFromIdentifiers (identifiers, config = {}) {
         let points = [];
         let parsedIdentifiers = identifiers;
@@ -525,25 +421,11 @@ export default class VisualUnit {
         return points;
     }
 
-    /**
-     *
-     *
-     * @param {*} name
-     * @returns
-     * @memberof VisualUnit
-     */
     removeLayerByName (name) {
         removeLayersBy('name', name);
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} type
-     * @returns
-     * @memberof VisualUnit
-     */
     removeLayersByType (type) {
         removeLayersBy('type', type);
         return this;
