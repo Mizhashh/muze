@@ -9,12 +9,6 @@ const BlankCell = cellRegistry().get().BlankCell;
 
 const createBlankCell = () => new BlankCell();
 
-/**
- *
- *
- * @param {*} canvases
- * @returns
- */
 const getMaxRows = (rows) => {
     const maxRows = [0, 0];
 
@@ -23,22 +17,8 @@ const getMaxRows = (rows) => {
     return maxRows;
 };
 
-/**
- *
- *
- * @param {*} arr
- * @param {*} value
- */
 const fillArray = (arr, value) => arr.map(() => value());
 
-/**
- *
- *
- * @param {*} rows
- * @param {*} columns
- * @param {*} blankCellCreator
- * @returns
- */
 const blankMatrixCreator = (rows, columns, blankCellCreator) => {
     const arr = [];
 
@@ -50,12 +30,6 @@ const blankMatrixCreator = (rows, columns, blankCellCreator) => {
     return arr;
 };
 
-/**
- *
- *
- * @param {*} rowMatrices
- * @param {*} maxRows
- */
 const blankCellCreator = (rowMatrices, maxRows) => rowMatrices.map((rowMatrix, rowMatrixIndex) => {
     if (rowMatrix.length === 0 && maxRows[rowMatrixIndex] > 0) {
         const numberOfRows = Math.max(rowMatrices[0].length, rowMatrices[1].length);
@@ -74,12 +48,6 @@ const blankCellCreator = (rowMatrices, maxRows) => rowMatrices.map((rowMatrix, r
     return rowMatrix;
 });
 
-/**
- *
- *
- * @param {*} context
- * @returns
- */
 export const prepareLayout = (layout, components, config, measurement) => {
     let topL;
     let topR;
@@ -121,13 +89,6 @@ export const prepareLayout = (layout, components, config, measurement) => {
                     .triggerReflow();
 };
 
-/**
- *
- *
- * @param {*} context
- * @param {*} mount
- * @returns
- */
 export const getRenderDetails = (context, mount) => {
     let layoutConfig = mergeRecursive({}, context.config());
     const visGroup = context.composition().visualGroup;

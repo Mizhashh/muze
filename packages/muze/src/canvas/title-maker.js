@@ -1,12 +1,6 @@
 import { TextCell } from '@chartshq/visual-cell';
 import { escapeHTML } from 'muze-utils';
 
-/**
- *
- *
- * @param {*} rawContent
- * @returns
- */
 const resolveTitleSubTitleContent = (rawContent) => {
     if (typeof rawContent === 'function' && !rawContent._sanitize) {
         return rawContent();
@@ -14,15 +8,6 @@ const resolveTitleSubTitleContent = (rawContent) => {
     return escapeHTML(rawContent());
 };
 
-/**
- *
- *
- * @param {*} config
- * @param {*} cellType
- * @param {*} labelManager
- * @param {*} prevCell
- * @returns
- */
 const headerCreator = (config, cellType, labelManager, prevCell) => {
     const {
         content
@@ -37,15 +22,6 @@ const headerCreator = (config, cellType, labelManager, prevCell) => {
     };
 };
 
-/**
- *
- *
- * @param {*} config
- * @param {*} type
- * @param {*} labelManager
- * @param {*} cell
- * @returns
- */
 const createHeading = (config, type, labelManager, prevCell) => {
     if (!config) { return ''; }
 
@@ -57,11 +33,6 @@ const createHeading = (config, type, labelManager, prevCell) => {
     );
 };
 
-/**
- *
- *
- * @param {*} context
- */
 export const createHeaders = (context, canvasHeight, canvasWidth) => {
     let headerHeight = 0;
     const headers = {};

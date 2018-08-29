@@ -8,12 +8,6 @@ import { TITLE_TEMPLATE_NOT_ALLOWED_TAGS } from './constants';
  */
 export const share = (...vars) => new ComposedVars(...vars.map(variable => new SimpleVariable(variable)));
 
-/**
- *
- *
- * @param {*} node
- * @returns
- */
 function treeShakeNode (node) {
     if (node.nodeType !== Node.ELEMENT_NODE) { return; }
 

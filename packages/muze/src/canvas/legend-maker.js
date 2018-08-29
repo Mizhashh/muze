@@ -3,13 +3,6 @@ import {
     VERTICAL, HORIZONTAL, LEFT, RIGHT, LEGEND_TYPE_MAP, PADDING, BORDER, CONFIG
 } from '../constants';
 
-/**
- *
- *
- * @param {*} legendConfig
- * @param {*} canvases
- * @returns
- */
 export const legendCreator = (canvas) => {
     let LegendCls;
     const dataset = [];
@@ -35,15 +28,6 @@ export const legendCreator = (canvas) => {
     return dataset;
 };
 
-/**
- *
- *
- * @param {*} legendConfig
- * @param {*} canvases
- * @param {*} measurement
- * @param {*} prevLegends
- * @returns
- */
 export const legendInitializer = (legendConfig, canvas, measurement, prevLegends) => {
     const legends = [];
     const {
@@ -107,15 +91,6 @@ export const legendInitializer = (legendConfig, canvas, measurement, prevLegends
     return legends;
 };
 
-/**
- *
- *
- * @param {*} legends
- * @param {*} legendConfig
- * @param {*} availableHeight
- * @param {*} availableWidth
- * @returns
- */
 export const getLegendSpace = (legends, legendConfig, availableHeight, availableWidth) => {
     const legendMeasures = legends.map(legendInfo => legendInfo.legend.measurement());
     const legendSpace = { width: 0, height: 0 };
@@ -148,13 +123,6 @@ export const getLegendSpace = (legends, legendConfig, availableHeight, available
     return legendSpace;
 };
 
-/**
- *
- *
- * @param {*} context
- * @param {*} headerHeight
- * @returns
- */
 export const createLegend = (context, headerHeight, height, width) => {
     const measurement = {
         height,

@@ -5,7 +5,7 @@ import { VERTICAL, HORIZONTAL, TOP, LEFT, RIGHT, BOTTOM } from '../constants';
  * Sets the rotation for all x axes if any axis has the rotation config set in the
  * entire view
  *
- * @param {Array} columns Column cells that contain the axes cells
+ * @param {Canvas} context Instance of canvas
  */
 const setLabelRotationForAxes = (context) => {
     let rotation = 0;
@@ -32,13 +32,6 @@ const setLabelRotationForAxes = (context) => {
     }
 };
 
-/**
- *
- *
- * @param {*} context
- * @param {*} mount
- * @returns
- */
 const getSkeletons = (mount, layoutConfig, measurement) => {
     const {
         layoutArrangement,
@@ -99,13 +92,6 @@ const getSkeletons = (mount, layoutConfig, measurement) => {
     return components;
 };
 
-/**
- *
- *
- * @param {*} context
- * @param {*} container
- * @param {*} legendComponents
- */
 const renderLegend = (legendConfig, container, legendComponents, measurement) => {
     const sectionComponents = [];
     const { legendSpace, headerHeight, height, width } = measurement;
@@ -168,14 +154,6 @@ const renderLegend = (legendConfig, container, legendComponents, measurement) =>
     }
 };
 
-/**
- *
- *
- * @param {*} context
- * @param {*} container
- * @param {*} type
- * @param {*} headers
- */
 const renderHeader = (layoutConfig, container, type, headers) => {
     const headerCell = headers[`${type}Cell`];
     const config = layoutConfig[`${type}`];
@@ -201,12 +179,6 @@ const renderHeader = (layoutConfig, container, type, headers) => {
     }
 };
 
-/**
- *
- *
- * @param {*} context
- * @param {*} shifter
- */
 const shiftHeaders = (config, shifter, measurement) => {
     const { classPrefix, title, subtitle, legend } = config;
     const { legendSpace } = measurement;
@@ -227,14 +199,6 @@ const shiftHeaders = (config, shifter, measurement) => {
                     .style('max-width', null);
 };
 
-/**
- *
- *
- * @param {*} mountPoint
- * @param {*} measurement
- * @param {*} classPrefix
- * @returns
- */
 const prepareGridContainer = (mountPoint, measurement, classPrefix, alias) => {
     if (!mountPoint) {
         return this;
@@ -280,14 +244,6 @@ const prepareGridContainer = (mountPoint, measurement, classPrefix, alias) => {
     };
 };
 
-/**
- *
- *
- * @param {*} context
- * @param {*} components
- * @param {*} layoutConfig
- * @param {*} measurement
- */
 export const renderComponents = (context, components, layoutConfig, measurement) => {
     const {
         headers,

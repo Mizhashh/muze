@@ -1,11 +1,5 @@
 import { TOP, BOTTOM, LEFT, TITLE, SUB_TITLE, GROUP, LAYOUT, LEGEND } from '../constants';
 
-/**
- *
- *
- * @param {*} context
- * @returns
- */
 export const arrangeComponents = (context) => {
     const legendConfig = context.config().legend;
     const titleConfig = context.title()[1];

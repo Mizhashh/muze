@@ -7,8 +7,9 @@ import { canvasOptions } from './local-options';
  * @nice-to-have dynamic high level components.
  *  - Is it even required ?
  *  - Reactive to source (canvas) streaming ?
+ *
  * @param {*} context Canvas instance
- * @return {Object.fArray>} Arrays of Title, visualGroup, Legend
+ * @return {Object.<Array>} Arrays of Title, visualGroup, Legend
  */
 export const initCanvas = (context) => {
     const reg = context._registry.components;
@@ -16,11 +17,6 @@ export const initCanvas = (context) => {
     return [new reg.VisualGroup(context._registry, context.dependencies())];
 };
 
-/**
- *
- *
- * @memberof Canvas
- */
 export const dispatchProps = (context) => {
     const lifeCycleManager = context.dependencies().lifeCycleManager;
     lifeCycleManager.notify({ client: context, action: 'beforeupdate' });
@@ -41,10 +37,6 @@ export const dispatchProps = (context) => {
     lifeCycleManager.notify({ client: context, action: 'updated' });
 };
 
-/**
- *
- *
- */
 export const setupChangeListener = (context) => {
     const store = context._store;
 

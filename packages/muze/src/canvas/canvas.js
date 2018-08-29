@@ -16,15 +16,6 @@ import { initCanvas, setupChangeListener } from './helper';
  *
  */
 export default class Canvas extends TransactionSupport {
-
-    /**
-     * Creates reactive property accessors.
-     * - data
-     * - height
-     * - width
-     * - config
-     * This configs are retrieved from options.
-     */
     constructor (globalDependencies) {
         super();
 
@@ -57,12 +48,6 @@ export default class Canvas extends TransactionSupport {
         setupChangeListener(this);
     }
 
-    /**
-     *
-     *
-     * @readonly
-     * @memberof Canvas
-     */
     layout (...params) {
         if (params.length) {
             return this;
@@ -70,12 +55,6 @@ export default class Canvas extends TransactionSupport {
         return this.composition().layout;
     }
 
-    /**
-     *
-     *
-     * @readonly
-     * @memberof Canvas
-     */
     composition (...params) {
         if (params.length) {
             return this;
@@ -87,13 +66,6 @@ export default class Canvas extends TransactionSupport {
         return this._renderedPromise;
     }
 
-    /**
-     *
-     *
-     * @param {*} params
-     * @returns
-     * @memberof Canvas
-     */
     alias (...params) {
         if (params.length) {
             const visualGroup = this.composition().visualGroup;
@@ -111,7 +83,7 @@ export default class Canvas extends TransactionSupport {
      * @param {Object} regEntry newly created instance with the initial settings
      * @param {Object} globalDependencies dependencies which will be created only once in the page
      *
-     * @return {Object} newly created instance with the initial settings
+     * @return {Canvas} newly created canvas instance with the initial settings
      */
     static withSettings (initialSettings, regEntry, globalDependencies) {
         const instance = new Canvas(globalDependencies);
@@ -124,23 +96,10 @@ export default class Canvas extends TransactionSupport {
         return instance;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof Canvas
-     */
     static formalName () {
         return 'canvas';
     }
 
-    /**
-     *
-     *
-     * @readonly
-     * @memberof Canvas
-     */
     firebolt (...firebolt) {
         if (firebolt.length) {
             this._firebolt = firebolt[0];
@@ -149,12 +108,6 @@ export default class Canvas extends TransactionSupport {
         return this._firebolt;
     }
 
-    /**
-     * Registry peoperty accessor
-     *
-     * @param {Object} reg plain old javascript object keyvalue pairs. Key containing module name and value contains
-     * module definition class. The reg object has to be flat object of level 1.
-     */
     registry (...params) {
         if (params.length) {
             const components = Object.assign({}, params[0].components);
@@ -183,13 +136,6 @@ export default class Canvas extends TransactionSupport {
         return this._dependencies;
     }
 
-    /**
-     *
-     *
-     * @param {*} lifeCycles
-     * @returns
-     * @memberof Canvas
-     */
     lifeCycle (lifeCycles) {
         const lifeCycleManager = this.dependencies().lifeCycleManager;
         if (lifeCycles) {
@@ -199,12 +145,6 @@ export default class Canvas extends TransactionSupport {
         return lifeCycleManager;
     }
 
-    /**
-     *
-     *
-     * @readonly
-     * @memberof Canvas
-     */
     legend (...params) {
         if (params.length) {
             return this;
@@ -212,13 +152,6 @@ export default class Canvas extends TransactionSupport {
         return this.composition().legend;
     }
 
-    /**
-     *
-     *
-     * @param {*} eventName
-     * @returns
-     * @memberof Canvas
-     */
     once (eventName) {
         const lifeCycleManager = this.dependencies().lifeCycleManager;
         return lifeCycleManager.retrieve(eventName);
@@ -227,7 +160,10 @@ export default class Canvas extends TransactionSupport {
     /**
      * Internal function to trigger render, this method is cognizant of all the properties of the core modules and
      * establish a passive reactivity. Passive reactivity is not always a bad thing :)
-     * @internal
+     *
+     * @private
+     *
+     * @return {Canvas} Instance of canvas.
      */
     render () {
         const mount = this.mount();
@@ -250,34 +186,17 @@ export default class Canvas extends TransactionSupport {
         Promise.all(promises).then(() => {
             this._renderedResolve();
         });
+        return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof Canvas
-     */
     xAxes () {
         return this.composition().visualGroup.getAxes('x');
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof Canvas
-     */
     yAxes () {
         return this.composition().visualGroup.getAxes('y');
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof Canvas
-     */
     getRetinalAxes () {
         const visualGroup = this.composition().visualGroup;
         return visualGroup.getAxes(RETINAL);
