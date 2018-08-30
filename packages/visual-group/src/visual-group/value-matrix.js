@@ -1,16 +1,4 @@
-/**
- *
- *
- * @export
- * @class ValueMatrix
- */
 class ValueMatrix {
-
-    /**
-     *Creates an instance of ValueMatrix.
-     * @param {*} matrixArr
-     * @memberof ValueMatrix
-     */
     constructor (matrixArr) {
         const instancesById = {};
 
@@ -28,13 +16,6 @@ class ValueMatrix {
         this.instancesById(instancesById);
     }
 
-    /**
-     *
-     *
-     * @param {*} id
-     * @return
-     * @memberof ValueMatrix
-     */
     instancesById (...id) {
         if (id.length) {
             this._instancesById = id[0];
@@ -43,13 +24,6 @@ class ValueMatrix {
         return this._instancesById;
     }
 
-    /**
-     *
-     *
-     * @param {*} m
-     * @return
-     * @memberof ValueMatrix
-     */
     matrix (...matrix) {
         if (matrix.length) {
             this._matrix = matrix[0];
@@ -58,13 +32,6 @@ class ValueMatrix {
         return this._matrix;
     }
 
-    /**
-     *
-     *
-     * @param {*} fn
-     * @return
-     * @memberof ValueMatrix
-     */
     filter (...fn) {
         if (fn.length) {
             this._filterFn = fn[0];
@@ -73,12 +40,6 @@ class ValueMatrix {
         return this._filterFn;
     }
 
-    /**
-     *
-     *
-     * @return
-     * @memberof ValueMatrix
-     */
     width () {
         let rowWidth = 0;
 
@@ -92,12 +53,6 @@ class ValueMatrix {
         return rowWidth;
     }
 
-    /**
-     *
-     *
-     * @return
-     * @memberof ValueMatrix
-     */
     height () {
         let rowHeight = 0;
 
@@ -111,13 +66,6 @@ class ValueMatrix {
         return rowHeight;
     }
 
-    /**
-     *
-     *
-     * @param {*} fn
-     * @return
-     * @memberof ValueMatrix
-     */
     each (fn) {
         const matrix = this.matrix();
         const filterFn = this.filter();
@@ -132,23 +80,10 @@ class ValueMatrix {
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} id
-     * @return
-     * @memberof ValueMatrix
-     */
     findPlaceHolderById (id) {
         return this.instancesById()[id];
     }
 
-    /**
-     *
-     *
-     * @return
-     * @memberof ValueMatrix
-     */
     getMatrixArray () {
         return this.matrix();
     }

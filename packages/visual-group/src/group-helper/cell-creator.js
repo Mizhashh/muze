@@ -11,12 +11,6 @@ import {
 } from './group-utils';
 import { ROW, ROWS, COLUMNS, COL, LEFT, RIGHT, TOP, BOTTOM, PRIMARY, SECONDARY, X, Y } from '../enums/constants';
 
-/**
- * Updates row and column cells with the geom cell corresponding to the facet keys
- *
- * @param {*} resolver
- * @param {*} facets
- */
 const updateCells = (resolver, facets, geomCell) => {
     [ROW, COL].forEach((field) => {
         const cells = resolver[`${field}Cells`]();
@@ -28,15 +22,6 @@ const updateCells = (resolver, facets, geomCell) => {
     });
 };
 
-/**
- *
- *
- * @param {*} context
- * @param {*} datamodel
- * @param {*} fieldInfo
- * @param {*} facets
- * @return
- */
 export const createValueCells = (context, datamodel, fieldInfo, facets) => {
     const {
         projections,
@@ -130,14 +115,6 @@ const createAxisCells = (selection, axes, axisIndex, cells) =>
         return new cells.BlankCell();
     });
 
-/**
- *
- *
- * @param {*} context
- * @param {*} selectionObj
- * @param {*} cells
- * @retur
- */
 const axisPlaceholderGn = (context, selObj, cells) => {
     const {
         matrices
@@ -186,15 +163,6 @@ const axisPlaceholderGn = (context, selObj, cells) => {
 const createTextCells = (selection, headers, cells, labelManager) => createSelection(selection,
     label => new cells.TextCell({}, { labelManager }).source(label), headers, (key, i) => key + i);
 
-/**
- *
- *
- * @param {*} context
- * @param {*} selectionObj
- * @param {*} cells
- * @param {*} labelManager
- * @return
- */
 const headerPlaceholderGn = (context, selectionObj, cells, labelManager) => {
     const {
         axis,
@@ -317,7 +285,8 @@ const generatePlaceholders = (context, cells, labelManager) => {
  * @param {Object} config Configuration to generate matrices
  * @param {Array} matrices Matrices containing the set of visual units and axes units
  * @param {Object} cells Contains a collection of the cells
- * @param {Object} labelManager smart label instance
+ * @param {Object} labelManager smart label instance.
+ *
  * @return {Object} contains a collection of matrices
  */
 export const generateMatrices = (context, matrices, cells, labelManager) => {

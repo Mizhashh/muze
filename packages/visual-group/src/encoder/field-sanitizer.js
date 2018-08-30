@@ -4,8 +4,9 @@ import { DIMENSION, COLUMNS, ROWS, TEMPORAL } from '../enums/constants';
 /**
  * Gets the list of fields in a sorted order by measurement and dimension
  *
- * @param {Array} fieldList List of fields in the view
- * @param {Object} fieldMap Mapping of fields in the datamodel
+ * @param {Array} fieldArray List of fields in the view
+ * @param {Object} type Type of field.
+ *
  * @return {Array} fields sorted by measurement and dimensions
  */
 const orderFields = (fieldArray, type) => {
@@ -67,9 +68,10 @@ const orderFields = (fieldArray, type) => {
 /**
  * Gets the list of normalized fields
  *
- * @param {Array} fields List of fields in the view
- * @param {Object} fieldMap Mapping of fields in the datamodel
- * @return {Array} fields normalized by measurement and dimensions
+ * @param {Array} config Field configuration.
+ * @param {string} type Field type.
+ *
+ * @return {Array} fields normalized by measurement and dimensions.
  */
 const normalizeFields = (config, type) => {
     const fieldsArr = [];
@@ -84,13 +86,6 @@ const normalizeFields = (config, type) => {
     return fieldsArr;
 };
 
-/**
- *
- *
- * @param {*} fields
- * @param {*} datamodel
- * @return
- */
 const convertToVar = (datamodel, fields) => {
     const vars = [];
 
@@ -105,14 +100,6 @@ const convertToVar = (datamodel, fields) => {
     return vars;
 };
 
-/**
- *
- *
- * @param {*} rows
- * @param {*} columns
- * @param {*} datamodel
- * @return
- */
 export const transformFields = (datamodel, config) => {
     const [rowsInfo, columnsInfo] = [ROWS, COLUMNS].map((fields) => {
         const normalizedFields = normalizeFields(config, fields);

@@ -5,14 +5,6 @@ import { getAxisType, getAxisKey } from '../group-helper';
 import { dataTypeScaleMap } from '../data-type-scale-map';
 import { CATEGORICAL, TEMPORAL, BAR, LINE, POINT, BOTH, Y } from '../enums/constants';
 
-/**
- *
- *
- * @param {*} axisInfo
- * @param {*} field
- * @param {*} axesCreators
- * @return
- */
 const getAxisConfig = (axisInfo, field, axesCreators) => {
     let axisOrientation;
     const { index, axisIndex, axisType } = axisInfo;
@@ -43,14 +35,6 @@ const getAxisConfig = (axisInfo, field, axesCreators) => {
     return mergeRecursive(axisConfig, userAxisConfig);
 };
 
-/**
- *
- *
- * @param {*} axisInfo
- * @param {*} field
- * @param {*} axesCreators
- * @return
- */
 const createSimpleAxis = (axisConfig, field, axesCreators) => {
     const { labelManager } = axesCreators;
     const Cls = scaleMaps[dataTypeScaleMap[field.subtype()]];
@@ -58,15 +42,6 @@ const createSimpleAxis = (axisConfig, field, axesCreators) => {
     return simpleAxis;
 };
 
-/**
- *
- *
- * @param {*} axisType
- * @param {*} fieldInfo
- * @param {*} axesCreators
- * @param {*} groupAxes
- * @return
- */
 export const generateAxisFromMap = (axisType, fieldInfo, axesCreators, groupAxes) => {
     let axisKey;
     const currentAxes = [];
@@ -101,11 +76,6 @@ export const generateAxisFromMap = (axisType, fieldInfo, axesCreators, groupAxes
     return map.get(axisKey);
 };
 
-/**
- *
- *
- * @memberof MatrixResolver
- */
 export const mutateAxesFromMap = (cacheMaps, axes) => {
     const {
         xAxesMap,
@@ -132,7 +102,7 @@ export const mutateAxesFromMap = (cacheMaps, axes) => {
 };
 
 /**
- * return a default mark based on predefined set of rules of type and subtype of the fields
+ * Return a default mark based on predefined set of rules of type and subtype of the fields
  *
  * @param {string} colFieldType dimension/measure - temporal/ordinal/nominal
  * @param {string} rowFieldType dimension/measure - temporal/ordinal/nominal
@@ -152,13 +122,6 @@ export const getDefaultMark = (colFieldType, rowFieldType) => {
     return mark;
 };
 
-/**
- *
- *
- * @param {*} axesCreators
- * @param {*} [fieldInfo=[]]
- * @return
- */
 export const createRetinalAxis = (axesCreators, fieldProps = {}) => {
     const { axisType, fieldsConfig } = axesCreators;
     const field = fieldProps.field;
@@ -170,13 +133,6 @@ export const createRetinalAxis = (axesCreators, fieldProps = {}) => {
     return axis;
 };
 
-/**
- *
- *
- * @param {*} arr
- * @param {*} val
- * @return
- */
 export const getIndex = (arr, val) => {
     let i = 0;
     let arrIndex = -1;
@@ -190,15 +146,6 @@ export const getIndex = (arr, val) => {
     return arrIndex;
 };
 
-/**
- *
- *
- * @param {*} colFields
- * @param {*} rowFields
- * @param {*} userLayerConfig
- * @return
- * @memberof CartesianEncoder
- */
 export const getLayerConfFromFields = (colFields, rowFields, userLayerConfig) => userLayerConfig.filter((conf) => {
     const userConf = conf instanceof Array ? conf : [conf];
     const encodingArr = [].concat(...userConf.map((d) => {

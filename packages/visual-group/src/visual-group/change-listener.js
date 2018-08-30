@@ -19,12 +19,6 @@ const sanitizeRetinalConfig = (retinalConf) => {
     return conf;
 };
 
-/**
- *
- *
- * @param {*} placeholder
- * @memberof VisualGroup
- */
 const setMatrixInstances = (context, placeholder) => {
     context._composition.matrices = {
         value: new ValueMatrix(placeholder.values),
@@ -36,12 +30,6 @@ const setMatrixInstances = (context, placeholder) => {
     return context;
 };
 
-/**
- *
- *
- * @param {*} context
- * @returns
- */
 export const setupChangeListeners = (context) => {
     context.store().registerImmediateListener([...Object.keys(localOptions), DATA_UPDATE_COUNTER], (...params) => {
         const datamodel = context.data();

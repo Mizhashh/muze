@@ -85,6 +85,7 @@ class VisualGroup extends SimpleGroup {
     /**
      * Returns the composition of the Group
      *
+     * @return {Object} All components of visual group like matrices and axes.
      * @readonly
      * @memberof VisualGroup
      */
@@ -117,24 +118,10 @@ class VisualGroup extends SimpleGroup {
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} variable
-     * @return
-     * @memberof VisualGroup
-     */
     where (variable) {
         return findInGroup(variable, this.resolver().getAllFields());
     }
 
-    /**
-     *
-     *
-     * @param {*} type
-     * @return
-     * @memberof VisualGroup
-     */
     getAxes (type) {
         if (type === RETINAL) {
             return this.resolver().getRetinalAxes();
@@ -142,23 +129,10 @@ class VisualGroup extends SimpleGroup {
         return this.resolver().getSimpleAxes(type);
     }
 
-    /**
-     *
-     *
-     * @return
-     * @memberof VisualGroup
-     */
     getCells (type) {
         return this.resolver()[`${type}Cells`]();
     }
 
-    /**
-     *
-     *
-     * @param {*} channel
-     * @return
-     * @memberof VisualGroup
-     */
     getFieldsFromChannel (channel) {
         const {
             rowProjections,
@@ -168,26 +142,12 @@ class VisualGroup extends SimpleGroup {
         return channel === Y ? rowProjections : colProjections;
     }
 
-    /**
-     *
-     *
-     * @param {*} facetKey
-     * @return
-     * @memberof VisualGroup
-     */
     getCellsByFacetKey (facetKey) {
         const resolver = this.resolver();
         const cells = resolver.rowCells()[facetKey] || resolver.colCells()[facetKey] || [];
         return cells;
     }
 
-    /**
-     *
-     *
-     * @param {*} facetKey
-     * @return
-     * @memberof VisualGroup
-     */
     getAxesByFacetKey (axisType, facetKey) {
         const resolver = this.resolver();
         const cells = resolver.rowCells()[facetKey] || resolver.colCells()[facetKey];

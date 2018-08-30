@@ -2,23 +2,8 @@ import { layerFactory } from '@chartshq/visual-layer';
 import { mergeRecursive } from 'muze-utils';
 import VisualEncoder from './visual-encoder';
 import { RADIUS, ANGLE, SIZE, MEASURE, ARC, POLAR, COLOR } from '../enums/constants';
-/**
- *
- *
- * @export
- * @class PolarEncoder
- * @extends {VisualEncoder}
- */
-export default class PolarEncoder extends VisualEncoder {
 
-    /**
-     *
-     *
-     * @param {*} axesCreators
-     * @param {*} fieldInfo
-     * @return
-     * @memberof PolarEncoder
-     */
+export default class PolarEncoder extends VisualEncoder {
     createAxis (axesCreators, fieldInfo) {
         const {
             axes
@@ -44,13 +29,6 @@ export default class PolarEncoder extends VisualEncoder {
         return geomCellAxes;
     }
 
-    /**
-     *
-     *
-     * @param {*} fields
-     * @return
-     * @memberof CartesianEncoder
-     */
     getFacetsAndProjections (fields) {
         let counter = 0;
         const facets = [];
@@ -87,23 +65,11 @@ export default class PolarEncoder extends VisualEncoder {
         };
     }
 
-    /**
-     *
-     *
-     * @return
-     * @memberof PolarEncoder
-     */
     setCommonDomain () {
         // No domain to be set
         return this;
     }
 
-    /**
-     *
-     *
-     * @return
-     * @memberof PolarEncoder
-     */
     static type () {
         return POLAR;
     }
@@ -116,13 +82,6 @@ export default class PolarEncoder extends VisualEncoder {
         return this._layers;
     }
 
-    /**
-     *
-     *
-     * @param {*} datamodel
-     * @param {*} config
-     * @memberof PolarEncoder
-     */
     fieldSanitizer (datamodel, config) {
         let sanitizedRows = [[], []];
         let sanitizedColumns = [[], []];
@@ -190,14 +149,7 @@ export default class PolarEncoder extends VisualEncoder {
         }
         return domains;
     }
-    /**
-     *
-     *
-     * @param {*} fields
-     * @param {*} userLayerConfig
-     * @return
-     * @memberof PolarEncoder
-     */
+
     getLayerConfig (fields, userLayerConfig) {
         let layerConfig = [];
         const {
@@ -227,13 +179,6 @@ export default class PolarEncoder extends VisualEncoder {
         return layerConfig;
     }
 
-    /**
-     *
-     *
-     * @param {*} layerArray
-     * @returns
-     * @memberof PolarEncoder
-     */
     serializeLayerConfig (layerArray) {
         const serializedLayers = [];
 

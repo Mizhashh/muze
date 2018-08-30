@@ -2,22 +2,7 @@ import { createRetinalAxis } from './encoder-helper';
 import { COLOR, SHAPE, SIZE } from '../enums/constants';
 import VisualEncoder from './visual-encoder';
 
-/**
- *
- *
- * @export
- * @class RetinalEncoder
- * @extends {VisualEncoder}
- */
 export default class RetinalEncoder extends VisualEncoder {
-
-    /**
-     *
-     *
-     * @param {*} axesCreators
-     * @return
-     * @memberof RetinalEncoder
-     */
     createAxis (axesCreators) {
         const { fieldsConfig, config } = axesCreators;
         const newAxes = {};
@@ -28,25 +13,10 @@ export default class RetinalEncoder extends VisualEncoder {
         return newAxes;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @return
-     * @memberof RetinalEncoder
-     */
     static type () {
         return 'retinal';
     }
 
-    /**
-     *
-     *
-     * @param {*} fields
-     * @param {*} userLayerConfig
-     * @return
-     * @memberof RetinalEncoder
-     */
     getLayerConfig (encodingConfigs, userLayerConfig) {
         const layerConfig = [];
         userLayerConfig.forEach((e) => {
@@ -72,13 +42,6 @@ export default class RetinalEncoder extends VisualEncoder {
         return layerConfig;
     }
 
-    /**
-     *
-     *
-     * @param {*} context
-     * @return
-     * @memberof RetinalEncoder
-     */
     setCommonDomain (context) {
         const { domains, axes, encoding } = context;
 

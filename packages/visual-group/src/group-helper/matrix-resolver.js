@@ -246,13 +246,6 @@ export default class MatrixResolver {
         return this._valueMatrix;
     }
 
-    /**
-     *
-     *
-     * @param {*} facets
-     * @return
-     * @memberof MatrixResolver
-     */
     facets (...facets) {
         if (facets.length) {
             Object.entries(facets[0]).forEach((e) => {
@@ -263,13 +256,6 @@ export default class MatrixResolver {
         return this._facets;
     }
 
-    /**
-     *
-     *
-     * @param {*} projections
-     * @return
-     * @memberof MatrixResolver
-     */
     projections (...projections) {
         if (projections.length) {
             Object.entries(projections[0]).forEach((e) => {
@@ -280,14 +266,6 @@ export default class MatrixResolver {
         return this._projections;
     }
 
-    /**
-     *
-     *
-     * @param {*} config
-     * @param {*} layerConfig
-     * @return
-     * @memberof MatrixResolver
-     */
     optionalProjections (config, layerConfig) {
         const otherEncodings = {};
         const optionalProjections = [];
@@ -320,13 +298,6 @@ export default class MatrixResolver {
         return otherEncodings;
     }
 
-    /**
-     * return the normalized set of rows and facets and projections
-     *
-     * @param {Object} rows parameters needed to set horizontal axis consisiting of rows
-     * @return {Object} facets, projections and normalized rows
-     * @memberof MatrixResolver
-     */
     horizontalAxis (rows, encoder) {
         if (rows) {
             this._horizontalAxis = setFacetsAndProjections(this, { type: ROW, fields: rows }, encoder);
@@ -335,13 +306,6 @@ export default class MatrixResolver {
         return this._horizontalAxis;
     }
 
-    /**
-     * return the normalized set of columns and facets and projections
-     *
-     * @param {Object} columns parameters needed to set vertical axis consisiting of columns
-     * @return {Object} facets, projections and normalized columns
-     * @memberof MatrixResolver
-     */
     verticalAxis (columns, encoder) {
         if (columns) {
             this._verticalAxis = setFacetsAndProjections(this, { type: COL, fields: columns }, encoder);
@@ -370,11 +334,13 @@ export default class MatrixResolver {
     }
 
     /**
-     * return a visual cell creator along with its axis information to be injected to the datamodel creation
+     * Return a visual cell creator along with its axis information to be injected to the datamodel creation
      * function
      *
-     * @param {Object} GeomCell Type of cell to be created
+     * @param {Object} context Attached instance
+     *
      * @return {Object} Created cell
+     *
      * @memberof MatrixResolver
      */
     valueCellsCreator (context) {
@@ -389,6 +355,7 @@ export default class MatrixResolver {
      *
      * @param {string} matrixType type of matrix on which callback is to be applied
      * @param {Function} callback function to be applied to each cell
+     *
      * @memberof MatrixResolver
      */
     forEach (matrixType, callback) {
@@ -399,12 +366,6 @@ export default class MatrixResolver {
         });
     }
 
-    /**
-     *
-     *
-     * @return
-     * @memberof MatrixResolver
-     */
     getAllFields () {
         const retObj = this.projections();
 
@@ -414,11 +375,6 @@ export default class MatrixResolver {
         return retObj;
     }
 
-    /**
-     *
-     *
-     * @memberof MatrixResolver
-     */
     resetSimpleAxes () {
         return this.axes({
             x: new Set(),
@@ -426,13 +382,6 @@ export default class MatrixResolver {
         });
     }
 
-    /**
-     *
-     *
-     * @param {*} componentRegistry
-     * @param {*} config
-     * @memberof MatrixResolver
-     */
     createUnits (componentRegistry, config) {
         const {
             globalConfig,
@@ -472,12 +421,6 @@ export default class MatrixResolver {
         return this.units(units);
     }
 
-    /**
-     *
-     *
-     * @param {*} config
-     * @memberof MatrixResolver
-     */
     setDomains (config, datamodel, encoders) {
         const {
             color,
@@ -505,12 +448,6 @@ export default class MatrixResolver {
         return this;
     }
 
-    /**
-     *
-     *
-     * @return
-     * @memberof MatrixResolver
-     */
     getRetinalAxes () {
         const {
             color,
@@ -525,24 +462,10 @@ export default class MatrixResolver {
         };
     }
 
-    /**
-     *
-     *
-     * @param {*} type
-     * @return
-     * @memberof MatrixResolver
-     */
     getSimpleAxes (type) {
         return this.axes()[`${type}`];
     }
 
-    /**
-     *
-     *
-     * @param {*} datamodel
-     * @param {*} config
-     * @memberof MatrixResolver
-     */
     createRetinalAxes (fieldsConfig, config, encoders) {
         const layerConfig = this.layerConfig();
         this.optionalProjections(config, layerConfig);
@@ -578,14 +501,6 @@ export default class MatrixResolver {
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} placeholders
-     * @param {*} fieldNames
-     * @return
-     * @memberof MatrixResolver
-     */
     createHeaders (placeholders, fieldNames) {
         let bottomLeft = [];
         let bottomRight = [];
@@ -641,16 +556,6 @@ export default class MatrixResolver {
         return { topLeft, topRight, bottomLeft, bottomRight };
     }
 
-    /**
-     *
-     *
-     * @param {*} datamodel
-     * @param {*} config
-     * @param {*} componentRegistry
-     * @param {*} encoders
-     * @return
-     * @memberof MatrixResolver
-     */
     getMatrices (datamodel, config, componentRegistry, encoders) {
         const context = {
             datamodel,

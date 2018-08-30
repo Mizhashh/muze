@@ -2,13 +2,6 @@ import { DataModel } from 'muze-utils';
 
 import { retriveDomainFromData } from './group-utils';
 
-/**
- * Gets name of fields form the variables
- *
- * @param {*} fields1
- * @param {*} [fields2=[]]
- * @return
- */
 const getFieldNames = (fields1, fields2 = []) => [fields1, fields2].map(fields => fields.reduce((acc, d) => {
     acc = [...acc, ...d.getMembers()];
     return acc;
@@ -25,13 +18,6 @@ const getFieldNames = (fields1, fields2 = []) => [fields1, fields2].map(fields =
 const createSelectedDataModel = (datamodel, fieldNames, fieldValues) =>
     datamodel.select(fields => fieldNames.every((field, k) => fields[field].value === fieldValues[k]));
 
-/**
- *
- *
- * @param {*} facets
- * @param {*} keyArray
- * @return
- */
 const uniqueKeyGenerator = (keyArray, context, depth = 0, val = []) => {
     const {
         facets,
@@ -64,6 +50,7 @@ const uniqueKeyGenerator = (keyArray, context, depth = 0, val = []) => {
  * projects row model based on the set of row and/or column and other projection fields
  *
  * @param {Object} datamodel provided as input
+ * @param {Array} projections Array of fields to be projected.
  * @return {Object} Projected datamodel
  */
 const projectRows = (datamodel, projections) => {
@@ -134,8 +121,7 @@ const pushToMatrix = (context, callback) => {
  * Gets Matrixes for corresponding datamodel, facets and projections
  *
  * @param {Object} dataModel input datamodel
- * @param {Object} fieldMap corresponding fieldmap
- * @param {Array} facetsAndProjections contains the set of facets and projections for the matrices
+ * @param {Object} fieldInfo corresponding field information
  * @param {Function} callback Callback executed after datamodels are prepared after sel/proj
  * @return {Object} set of matrices with the corresponding row and column keys
  */

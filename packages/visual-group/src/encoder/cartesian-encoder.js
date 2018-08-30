@@ -6,33 +6,11 @@ import { retriveDomainFromData } from '../group-helper';
 import { ROW, COLUMN, COL, LEFT, TOP, CARTESIAN, MEASURE, BOTH, X, Y } from '../enums/constants';
 import VisualEncoder from './visual-encoder';
 
-/**
- *
- *
- * @export
- * @class CartesianEncoder
- * @extends {VisualEncoder}
- */
 export default class CartesianEncoder extends VisualEncoder {
-
-    /**
-     *
-     *
-     * @return
-     * @memberof CartesianEncoder
-     */
     static type () {
         return CARTESIAN;
     }
 
-    /**
-     *
-     *
-     * @param {*} axesCreators
-     * @param {*} fieldInfo
-     * @return
-     * @memberof CartesianEncoder
-     */
     createAxis (axesCreators, fieldInfo) {
         const geomCellAxes = {};
         const {
@@ -74,13 +52,6 @@ export default class CartesianEncoder extends VisualEncoder {
         return geomCellAxes;
     }
 
-    /**
-     *
-     *
-     * @param {*} fields
-     * @return
-     * @memberof CartesianEncoder
-     */
     getFacetsAndProjections (fields, type) {
         let facets = [];
         let projections = [];
@@ -154,25 +125,10 @@ export default class CartesianEncoder extends VisualEncoder {
         };
     }
 
-    /**
-     *
-     *
-     * @param {*} datamodel
-     * @param {*} config
-     * @return
-     * @memberof CartesianEncoder
-     */
     fieldSanitizer (datamodel, config) {
         return super.fieldSanitizer(datamodel, config);
     }
 
-    /**
-     *
-     *
-     * @param {*} datamodel
-     * @return
-     * @memberof CartesianEncoder
-     */
     getRetinalFieldsDomain (dataModels, encoding) {
         const groupedModel = dataModels.groupedModel;
         const domains = {};
@@ -189,12 +145,6 @@ export default class CartesianEncoder extends VisualEncoder {
         return domains;
     }
 
-    /**
-     *
-     *
-     * @param {*} layerArray
-     * @memberof CartesianEncoder
-     */
     serializeLayerConfig (layerArray) {
         const serializedLayers = [];
 
@@ -208,14 +158,6 @@ export default class CartesianEncoder extends VisualEncoder {
         return serializedLayers;
     }
 
-    /**
-     *
-     *
-     * @param {*} fields
-     * @param {*} userLayerConfig
-     * @return
-     * @memberof CartesianEncoder
-     */
     getLayerConfig (fields, userLayerConfig) {
         const layerConfig = [];
         const {

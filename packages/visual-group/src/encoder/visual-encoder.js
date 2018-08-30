@@ -3,37 +3,15 @@ import { transformFields } from './field-sanitizer';
 import { getHeaderAxisFrom } from '../group-helper/group-utils';
 import { ROW, COLUMN } from '../enums/constants';
 
-/**
- *
- *
- * @export
- * @class VisualEncoder
- */
 export default class VisualEncoder {
-
-    /**
-     *
-     *
-     * @memberof VisualEncoder
-     */
     createAxis () {
         throw new Error(ERROR_MSG.INTERFACE_IMPL);
     }
 
-    /**
-     *
-     *
-     * @memberof VisualEncoder
-     */
     setCommonDomain () {
         throw new Error(ERROR_MSG.INTERFACE_IMPL);
     }
 
-    /**
-     *
-     *
-     * @memberof VisualEncoder
-     */
     getLayerConfig () {
         throw new Error(ERROR_MSG.INTERFACE_IMPL);
     }
@@ -46,26 +24,11 @@ export default class VisualEncoder {
         return this._fieldInfo;
     }
 
-    /**
-     *
-     *
-     * @param {*} datamodel
-     * @param {*} config
-     * @return
-     * @memberof VisualEncoder
-     */
     fieldSanitizer (datamodel, config) {
         this.fieldInfo(transformFields(datamodel, config));
         return this.fieldInfo();
     }
 
-    /**
-     *
-     *
-     * @param {*} params
-     * @return
-     * @memberof VisualEncoder
-     */
     axisFrom (...params) {
         if (params.length) {
             this._axisFrom = params[0];
@@ -74,13 +37,6 @@ export default class VisualEncoder {
         return this._axisFrom;
     }
 
-    /**
-     *
-     *
-     * @param {*} params
-     * @return
-     * @memberof VisualEncoder
-     */
     headerFrom (...params) {
         if (params.length) {
             this._headerFrom = params[0];
@@ -89,13 +45,6 @@ export default class VisualEncoder {
         return this.__headerFrom;
     }
 
-    /**
-     *
-     *
-     * @param {*} axisFrom
-     * @return
-     * @memberof CartesianEncoder
-     */
     setAxisAndHeaders (axisFrom = {}, fields) {
         const [rowHeader, rowAxis] = getHeaderAxisFrom(ROW, fields.rows, axisFrom);
         const [colHeader, colAxis] = getHeaderAxisFrom(COLUMN, fields.columns, axisFrom);
