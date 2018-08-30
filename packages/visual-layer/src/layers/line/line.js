@@ -33,55 +33,28 @@ import './styles.scss';
  * @class
  */
 export default class LineLayer extends BaseLayer {
-
-    /**
-     *Creates an instance of LineLayer.
-     * @param {*} args
-     * @memberof LineLayer
-     */
     constructor (...args) {
         super(...args);
         this._voronoi = new Voronoi();
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof LineLayer
-     */
     static formalName () {
         return 'line';
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof LineLayer
-     */
     elemType () {
         return 'path';
     }
 
     /**
      * Default configuration of line layer
+     *
      * @return {Object} Default configuration of layer
      */
     static defaultConfig () {
         return defaultConfig;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @param {*} conf
-     * @param {*} userConf
-     * @returns
-     * @memberof LineLayer
-     */
     static defaultPolicy (conf, userConf) {
         const config = BaseLayer.defaultPolicy(conf, userConf);
         const encoding = config.encoding;
@@ -95,47 +68,12 @@ export default class LineLayer extends BaseLayer {
     }
 
     /**
-     * Returns the draw method for line
+     * Returns the draw method for line.
+     *
      * @return {Function} Draw method of line layer
      */
     getDrawFn () {
         return drawLine;
-    }
-
-    /**
-     * Applies selection styles to the elements that fall within the selection set.
-     * @param {Array} selectionSet Array of tuple ids.
-     * @param {Object} config Configuration for selection.
-     * @return {BarLayer} Instance of bar layer.
-     */
-    highlightPoint () {
-        return this;
-    }
-
-    /**
-     * Removes selection styles to the elements that fall within the selection set.
-     * @param {Array} selectionSet Array of tuple ids.
-     * @param {Object} config Configuration for selection.
-     * @return {BarLayer} Instance of bar layer.
-     */
-    dehighlightPoint () {
-        return this;
-    }
-
-    focusSelection () {
-        return this;
-    }
-
-    focusOutSelection () {
-        return this;
-    }
-
-    fadeOutSelection () {
-        return this;
-    }
-
-    unfadeSelection () {
-        return this;
     }
 
     shouldDrawAnchors () {
@@ -143,11 +81,12 @@ export default class LineLayer extends BaseLayer {
     }
 
     /**
-     * Generates the x and y positions for each point
+     * Generates the x and y positions for each point.
+     *
      * @param {Array} data Data Array
-     * @param {Object} encoding Visual Encodings of the layer
+     * @param {Object} encodingFieldsInf Encoding field names and types.
      * @param {Object} axes Contains the axis
-     * @param {number} seriesIndex index of series
+     *
      * @return {Array} Array of points
      */
     translatePoints (data, encodingFieldsInf, axes) {
@@ -201,7 +140,9 @@ export default class LineLayer extends BaseLayer {
 
     /**
      * Renders the line plot
+     *
      * @param {SVGElement} container svg element
+     *
      * @return {LineLayer} instance of line layer
      */
     render (container) {
@@ -273,8 +214,10 @@ export default class LineLayer extends BaseLayer {
     }
 
     /**
-     * Get the css styles need to be applied on the line path
+     * Get the css styles need to be applied on the line path.
+     *
      * @param {string} color Color value
+     *
      * @return {Object} Path styles
      */
     getPathStyle (color) {
@@ -285,9 +228,12 @@ export default class LineLayer extends BaseLayer {
     }
 
     /**
-     * Gets the nearest point closest to the given position
+     * Gets the nearest point closest to the given position.
+     *
      * @param {number} x x position
      * @param {number} y y position
+     * @param {Object} config Information about how the nearest point should be fetched from the layer.
+     *
      * @return {Object} Nearest point information
      */
     getNearestPoint (x, y, config) {

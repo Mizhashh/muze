@@ -51,36 +51,16 @@ export const applyInteractionStyle = (context, selectionSet, interactionStyles, 
     });
 };
 
-/**
- *
- *
- * @param {*} selectionSet
- * @param {*} className
- * @param {*} hasFaded
- */
 export const fadeUnfadeSelection = (context, selectionSet, hasFaded, interaction) => {
     const interactionConfig = { interaction, apply: hasFaded };
     applyInteractionStyle(context, selectionSet, 'fade', interactionConfig);
 };
 
-/**
- *
- *
- * @param {*} selectionSet
- * @param {*} className
- * @param {*} hasFaded
- */
 export const focusUnfocusSelection = (context, selectionSet, isFocussed, interaction) => {
     const interactionConfig = { interaction, apply: isFocussed };
     applyInteractionStyle(context, selectionSet, 'focus', interactionConfig);
 };
 
-/**
- *
- *
- * @param {*} axes
- * @returns
- */
 export const getAxesScales = (axes) => {
     const [xAxis, yAxis] = [ENCODING.X, ENCODING.Y].map(e => axes[e]);
     const [xScale, yScale] = [xAxis, yAxis].map(e => e && e.scale());
@@ -92,13 +72,6 @@ export const getAxesScales = (axes) => {
     };
 };
 
-/**
- *
- *
- * @param {*} encoding
- * @param {*} fieldsConfig
- * @returns
- */
 export const getEncodingFieldInf = (encoding, fieldsConfig) => {
     const [xField, yField, x0Field, y0Field, colorField, shapeField, sizeField] =
         [ENCODING.X, ENCODING.Y, ENCODING.X0, ENCODING.Y0, COLOR, SHAPE, SIZE].map(e => encoding[e] &&
@@ -132,13 +105,6 @@ export const getEncodingFieldInf = (encoding, fieldsConfig) => {
     };
 };
 
-/**
- *
- *
- * @param {*} layerConfig
- * @param {*} fieldsConfig
- * @returns
- */
 export const getValidTransform = (layerConfig, fieldsConfig, encodingFieldInf) => {
     let transformType;
     const {
@@ -160,14 +126,6 @@ export const getValidTransform = (layerConfig, fieldsConfig, encodingFieldInf) =
     return transformType;
 };
 
-/**
- *
- *
- * @param {*} dataModel
- * @param {*} config
- * @param {*} transformType
- * @returns
- */
 export const transformData = (dataModel, config, transformType, encodingFieldInf) => {
     const data = dataModel.getData({ withUid: true });
     const schema = data.schema;
@@ -189,13 +147,16 @@ export const transformData = (dataModel, config, transformType, encodingFieldInf
     }, data.uids);
 };
 
-/*
+/**
  * This method resolves the x, y, x0 and y0 values from the transformed data.
  * It also checks the type of transformed data for example, if it is a stacked data
  * then it fetches the y and y0 values from the stacked data.
+ *
  * @param {Array.<Array>} transformedData transformed data
  * @param {Object} fieldsConfig field definitions
+ * @param {Object} encodingFieldInf Encoding field names and types.
  * @param {string} transformType type of transformed data - stack, group or identity.
+ *
  * @return {Array.<Object>} Normalized data
 */
 export const getNormalizedData = (transformedData, fieldsConfig, encodingFieldInf, transformType) => {
@@ -294,13 +255,6 @@ export const attachDataToVoronoi = (voronoi, points) => {
     }));
 };
 
-/**
- *
- *
- * @param {*} target
- * @param {*} styles
- * @param {*} remove
- */
 export const updateStyle = (target, styles, remove) => {
     for (const key in styles) {
         if ({}.hasOwnProperty.call(styles, key)) {
@@ -309,12 +263,6 @@ export const updateStyle = (target, styles, remove) => {
     }
 };
 
-/**
- *
- *
- * @param {*} mount
- * @param {*} context
- */
 export const animateGroup = (mount, context) => {
     let groupTransition;
     let update;

@@ -109,15 +109,6 @@ export default class VisualUnit {
         return FORMAL_NAME;
     }
 
-    /**
-     * Static helper for creates a unit instance
-     *
-     * @param {Object} [id] optional unique identifier for a unit; , id is calculated internally
-     * @param {DataModel} data instance of datamodel
-     * @param {Array.<Layer>} layers layer configuration
-     * @param {Object} config configurtion for the visual unit
-     * @return {VisualUnit} Instance of a unit
-     */
     static create (...params) {
         return new this(...params);
     }
@@ -132,6 +123,7 @@ export default class VisualUnit {
 
     /**
      * Gets the domain for all axes of this visual unit.
+     *
      * @return {Object} Domains of each data field.
      */
     getDataDomain () {
@@ -140,6 +132,7 @@ export default class VisualUnit {
 
     /**
      * Retrieves the id created for this instance of visual unit
+     *
      * @return {string} id associated with the instance
      */
     id () {
@@ -353,8 +346,10 @@ export default class VisualUnit {
 
     /**
      * Finds the nearest point closest to the x and y position.
+     *
      * @param {number} x x position.
      * @param {number} y y position.
+     *
      * @return {Object} Nearest point.
      */
     getNearestPoint (x, y, args) {

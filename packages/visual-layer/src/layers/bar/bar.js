@@ -17,15 +17,10 @@ import { getTranslatedPoints, getBarMeasurement } from './bar-helper';
 
 const MEASURE = FieldType.MEASURE;
 const scaleBand = Scales.band;
+
 /**
  * Bar Layer creates a bar plot. It needs to be passed a data table, axes and configuration of the layer.
  *
- * @example
- * const BarLayer = layerFactory.getLayer('bar');
- * BarLayer.create()
- *  .config(config)
- *  .data(dt)
- *  .mountPoint(container);
  * @class
  */
 export default class BarLayer extends BaseLayer {
@@ -38,44 +33,23 @@ export default class BarLayer extends BaseLayer {
         this._pointMap = {};
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof BarLayer
-     */
     elemType () {
         return 'rect';
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof BarLayer
-     */
     static formalName () {
         return 'bar';
     }
 
     /**
-     * Returns the default configuration of the bar layer
+     * Returns the default configuration of the bar layer.
+     *
      * @return {Object} Default configuration of the bar layer
      */
     static defaultConfig () {
         return defaultConfig;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @param {*} conf
-     * @param {*} userConf
-     * @returns
-     * @memberof BarLayer
-     */
     static defaultPolicy (conf, userConf) {
         const config = BaseLayer.defaultPolicy(conf, userConf);
         const encoding = config.encoding;
@@ -88,14 +62,6 @@ export default class BarLayer extends BaseLayer {
         return config;
     }
 
-    /**
-     *
-     *
-     * @param {*} data
-     * @param {*} fieldsConfig
-     * @returns
-     * @memberof BarLayer
-     */
     calculateDomainFromData (data, encodingFieldInf, fieldsConfig) {
         const domain = super.calculateDomainFromData(data, encodingFieldInf, fieldsConfig);
         ['x', 'y'].forEach((d) => {
@@ -109,10 +75,10 @@ export default class BarLayer extends BaseLayer {
 
     /**
      * Generates an array of objects containing x, y, width and height of the bars from the data
-     * @param  {Array.<Array>} data Data Array
-     * @param  {Object} encoding  Config
-     * @param  {Object} axes     Axes object
-     * @param {Object} conf config object for point generation
+     *
+     * @param {Array.<Array>} data Data Array
+     * @param {Object} sizeConfig Contains dimensions of the bar plot.
+     *
      * @return {Array.<Object>}  Array of points
      */
     translatePoints (data, sizeConfig) {
@@ -120,8 +86,10 @@ export default class BarLayer extends BaseLayer {
     }
 
     /**
-     * Renders the plot in the given container
+     * Renders the plot in the given container.
+     *
      * @param  {SVGGroup} container SVGGroup where plot will be rendered.
+     *
      * @return {BarLayer} Instance of bar layer.
      */
     render (container) {
@@ -174,14 +142,6 @@ export default class BarLayer extends BaseLayer {
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} normalizedData
-     * @param {*} keys
-     * @returns
-     * @memberof BarLayer
-     */
     generateDataPoints (normalizedData, keys) {
         const config = this.config();
         const axes = this.axes();
@@ -224,10 +184,13 @@ export default class BarLayer extends BaseLayer {
     getPlotPadding () {
         return this._plotPadding;
     }
+
     /**
      * Gets the nearest point of the position passed.
-     * @param {number} x x position
-     * @param {number} y y position
+     *
+     * @param {number} x x position.
+     * @param {number} y y position.
+     *
      * @return {Object} Nearest point.
      */
     getNearestPoint (x, y) {

@@ -8,11 +8,6 @@ import { updateStyle } from '../../helpers';
 
 const line = Symbols.line;
 
-/**
- * Draws a line from the points
- * Generates a svg path string
- * @param {Object} params Contains container, points and interpolate attribute.
- */
 export const drawLine = (context) => {
     let filteredPoints;
     const { container, points, interpolate, connectNullData, className, style } = context;

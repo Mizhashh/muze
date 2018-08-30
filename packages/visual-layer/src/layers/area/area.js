@@ -29,7 +29,9 @@ import { getAxesScales, positionPoints, getLayerColor } from '../../helpers';
  * @class
  */
 export default class AreaLayer extends LineLayer {
-    /** oation of line layer
+    /**
+     * Returns the defualt configuration of line layer.
+     *
      * @return {Object} Default configuration of layer
      */
     static defaultConfig () {
@@ -47,11 +49,6 @@ export default class AreaLayer extends LineLayer {
         return 'area';
     }
 
-    /**
-     * Calculates the domain from data. It calls its parent class's method which is line layer
-     * to get the domain and overwrites the domain according to its need.
-     * @return {Array} Domain values
-     */
     calculateDomainFromData (data, encodingFieldsInf, fieldsConfig) {
         const domains = super.calculateDomainFromData(data, fieldsConfig);
         [ENCODING.X, ENCODING.Y].forEach((type) => {
@@ -65,6 +62,7 @@ export default class AreaLayer extends LineLayer {
 
     /**
      * Returns the drawing method of this layer
+     *
      * @return {Function} Draw method
      */
     getDrawFn () {
@@ -73,9 +71,11 @@ export default class AreaLayer extends LineLayer {
 
     /**
      * Generates the x and y positions for each point
+     *
      * @param {Array} data Data Array
-     * @param {Object} encoding Visual Encodings of the layer
-     * @param {Object} axes Contains the axis
+     * @param {Object} encodingFieldsInf Encoding field names and their types.
+     * @param {Object} axes Axis instances attached to the layer.
+     *
      * @return {Array} Array of points
      */
     translatePoints (data, encodingFieldsInf, axes) {
@@ -135,8 +135,10 @@ export default class AreaLayer extends LineLayer {
     }
 
     /**
-     * Get the css styles need to be applied on the line path
-     * @param {string} color Color value
+     * Get the css styles need to be applied on the line path.
+     *
+     * @param {string} color Color value.
+     *
      * @return {Object} Path styles
      */
     getPathStyle (color) {

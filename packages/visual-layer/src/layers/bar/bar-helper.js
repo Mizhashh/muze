@@ -6,15 +6,6 @@ import { getLayerColor, positionPoints } from '../../helpers/';
 
 const BAND = ScaleType.BAND;
 
-/**
- *
- *
- * @param {*} type
- * @param {*} fieldInfo
- * @param {*} config
- * @param {*} data
- * @returns
- */
 const resolveDimByField = (type, axesInfo, config, data) => {
     const spaceType = type === 'x' ? 'width' : 'height';
     const [fieldType, axis] = [config[`${type}FieldType`], axesInfo[`${type}Axis`]];
@@ -96,14 +87,6 @@ const resolveDimByField = (type, axesInfo, config, data) => {
     };
 };
 
-/**
- *
- *
- * @param {*} data
- * @param {*} config
- * @param {*} axes
- * @returns
- */
 const resolveDimensions = (data, config, axes) => {
     const axesInfo = {
         xAxis: axes.x,
@@ -160,17 +143,6 @@ const getGroupWidth = (axis, minDiff) => {
     return barWidth;
 };
 
-/**
- * Gets the width and offset values of the bar.
- * Bar layer can be grouped or stacked based on which the width and offsetValues are
- * calculated.
- * @param { Axis } axis Axis instance needed for calculating the group width
- * @param { number } dataLen Number of data points
- * @param { string} transformType type of transform - group, stack
- * @param { number } innerPadding padding between bars.
- * @param {number} keys Series values
- * @return { Object } Width and offset of bars.
- */
 export const getBarMeasurement = (axis, bandScale, config) => {
     let width;
     let offsetValues;
@@ -224,11 +196,12 @@ export const getBarMeasurement = (axis, bandScale, config) => {
 };
 
 /**
- * Generates an array of objects containing x, y, width and height of the bars from the data
- * @param  {Array.<Array>} data Data Array
- * @param  {Object} encoding  Config
- * @param  {Object} axes     Axes object
- * @param {Object} conf config object for point generation
+ * Generates an array of objects containing x, y, width and height of the bars from the data.
+ *
+ * @param {BarLayer} context Instance of bar layer.
+ * @param {Array} data Array of data points.
+ * @param {Object} sizeConfig Dimensions of bar plots.
+ *
  * @return {Array.<Object>}  Array of points
  */
 export const getTranslatedPoints = (context, data, sizeConfig) => {

@@ -80,6 +80,7 @@ export default class BaseLayer extends SimpleLayer {
 
     /**
      * Creates a layer instance
+     *
      * @return {BaseLayer} Instance of a layer
      */
     static create (...params) {
@@ -124,7 +125,7 @@ export default class BaseLayer extends SimpleLayer {
     /**
      * Determines a name for a layer. This name of the layer is used in the input data to refer to this layer.
      * ```
-     *  .layer([
+     *  .layers([
      *      mark: 'bar',
      *      encoding: { ... }
      *  ])
@@ -133,7 +134,7 @@ export default class BaseLayer extends SimpleLayer {
      * @static
      * @public
      *
-     * @returns {string} name of layer
+     * @return {string} name of layer
      */
     static formalName () {
         return 'base';
@@ -228,10 +229,11 @@ export default class BaseLayer extends SimpleLayer {
      * transform method with the data and passes the configuration parameters of transform such as
      * groupBy, value field, etc.
      *
-     * @public
-     *
      * @param {DataModel} dataModel Instance of DataModel
      * @param {Object} config Configuration for transforming data
+     * @param {string} transformType Type of transform.
+     * @param {Object} encodingFieldsInf Encoding field names and field types.
+     *
      * @return {Array.<Array>} Transformed data.
      */
     getTransformedData (dataModel, config, transformType, encodingFieldsInf) {
@@ -243,8 +245,10 @@ export default class BaseLayer extends SimpleLayer {
      * It checks the type of field and calculates the domain based on that. For example, if it
      * is a quantitative or temporal field, then it calculates the min and max from the data or
      * if it is a nominal field then it gets all the values from the data of that field.
+     *
      * @param {Array} data DataArray
      * @param {Object} fieldsConfig Configuration of fields
+     *
      * @return {Array} Domain values array.
      */
     calculateDomainFromData (data) {
@@ -273,10 +277,12 @@ export default class BaseLayer extends SimpleLayer {
     }
 
     /**
-     * Returns the domain for the axis.
+     * Normalizes the transformed data into a form so that the layer can consume it.
      *
-     * @param {string} encodingType type of encoding x, y, etc.
-     * @return {Object} Axis domains
+     * @param {Array} transformedData Transformed data.
+     * @param {Object} fieldsConfig Configuration of fields.
+     *
+     * @return {Array} Normalized data.
      */
     getNormalizedData (transformedData, fieldsConfig) {
         return getNormalizedData(transformedData, fieldsConfig, this.encodingFieldsInf(), this.transformType());
@@ -284,6 +290,7 @@ export default class BaseLayer extends SimpleLayer {
 
     /**
      * Abstract method for getting nearest point
+     *
      * @return {BaseLayer} Instance of base layer
      */
     getNearestPoint () {
@@ -302,12 +309,6 @@ export default class BaseLayer extends SimpleLayer {
         }
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof BaseLayer
-     */
     transformType (...transformType) {
         if (transformType.length) {
             this._transformType = transformType[0];
@@ -318,24 +319,20 @@ export default class BaseLayer extends SimpleLayer {
 
     /**
      * Renders the layer
+     *
      * @return {BaseLayer} Instance of the layer.
      */
     render () {
         return this;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof BaseLayer
-     */
     elemType () {
         return 'g';
     }
 
     /**
-     * Disposes the entire layer
+     * Removes the dom elements and listeners from the layer.
+     *
      * @return {BaseLayer} Instance of layer.
      */
     remove () {
@@ -347,8 +344,9 @@ export default class BaseLayer extends SimpleLayer {
     /**
      * Stores point in an object with key as the categorical value or temporal value
      *
-     * @param {string} key categorical value or temporal value
-     * @param {Object} data Information of the data point
+     * @param {string} key categorical value or temporal value.
+     * @param {Object} data Information of the data point.
+     *
      * @return {BarLayer} Instance of bar layer
      */
     cachePoint (key, data) {
@@ -361,13 +359,6 @@ export default class BaseLayer extends SimpleLayer {
         return this;
     }
 
-    /**
-     *
-     *
-     * @param {*} dataProps
-     * @returns
-     * @memberof BaseLayer
-     */
     dataProps (...dataProps) {
         if (dataProps.length) {
             this._dataProps = dataProps[0];
@@ -376,14 +367,6 @@ export default class BaseLayer extends SimpleLayer {
         return this._dataProps;
     }
 
-    /**
-     *
-     *
-     * @param {*} data
-     * @param {*} id
-     * @returns
-     * @memberof BaseLayer
-     */
     getIdentifiersFromData (data) {
         const schema = this.data().getData().schema;
         const fieldsConfig = this.data().getFieldsConfig();
@@ -427,13 +410,6 @@ export default class BaseLayer extends SimpleLayer {
         };
     }
 
-    /**
-     *
-     *
-     * @param {*} identifiers
-     * @returns
-     * @memberof BaseLayer
-     */
     getPointsFromIdentifiers (identifiers, config = {}) {
         const getAllAttrs = config.getAllAttrs;
         const getBBox = config.getBBox;
@@ -522,13 +498,6 @@ export default class BaseLayer extends SimpleLayer {
         return [transformedData, this.data().getData().schema];
     }
 
-    /**
-     *
-     *
-     * @param {*} set
-     * @returns
-     * @memberof BaseLayer
-     */
     getPlotElementsFromSet (set) {
         return selectElement(this.mount()).selectAll(this.elemType()).filter(data => set.indexOf(data._id) !== -1);
     }

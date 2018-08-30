@@ -6,6 +6,7 @@ import {
 } from 'muze-utils';
 
 const area = Symbols.area;
+
 /**
  * Draws a line from the points
  * Generates a svg path string

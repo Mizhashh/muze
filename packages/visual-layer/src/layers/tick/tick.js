@@ -8,52 +8,25 @@ import './styles.scss';
 import { getAxesScales, getLayerColor, positionPoints } from '../../helpers';
 
 export default class TickLayer extends PointLayer {
-
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof TickLayer
-     */
     static defaultConfig () {
         return defaultConfig;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof TickLayer
-     */
     static formalName () {
         return 'tick';
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof TickLayer
-     */
     static drawFn () {
         return drawTicks;
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof TickLayer
-     */
     elemType () {
         return 'path';
     }
 
     /**
-     * Generates an array of objects containing x, y, width and height of the points from the data
+     * Generates an array of objects containing x, y, width and height of the points from the data.
+     *
      * @param  {Array.<Array>} data Data Array
      * @param  {Object} encoding  Config
      * @param  {Object} axes     Axes object

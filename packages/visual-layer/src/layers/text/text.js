@@ -16,6 +16,7 @@ import './styles.scss';
 /**
  * Text Layer creates labels. It needs to be passed a data table, axes and configuration
  * of the layer.
+ *
  * Example :-
  * const textLayer = layerFactory.getLayer('text', [dataModel, axes, config]);
  * textLayer.render(container);
@@ -23,7 +24,8 @@ import './styles.scss';
  */
 export default class TextLayer extends BaseLayer {
     /**
-     * Returns the default configuration of the text layer
+     * Returns the default configuration of the text layer.
+     *
      * @return {Object} Default configuration of the text layer
      */
     static defaultConfig () {
@@ -39,10 +41,12 @@ export default class TextLayer extends BaseLayer {
     }
 
     /**
-     * Generates an array of objects containing x, y, width and height of the points from the data
-     * @param  {Array.<Array>} data Data Array
-     * @param  {Object} encoding  Config
-     * @param  {Object} axes     Axes object
+     * Generates an array of objects containing x, y, width and height of the points from the data.
+     *
+     * @param  {Array.<Array>} data Normalized data array.
+     * @param  {Object} encoding Encoding information.
+     * @param  {Object} axes Instances of axis.
+     *
      * @return {Array.<Object>}  Array of points
      */
     translatePoints (data, encoding, axes) {
@@ -96,8 +100,10 @@ export default class TextLayer extends BaseLayer {
     }
 
     /**
-     * Renders the plot in the given container
-     * @param  {SVGElement} container SVGElement which will hold the plot
+     * Renders the plot in the given container.
+     *
+     * @param  {SVGElement} container SVGElement which will hold the plot.
+     *
      * @return {textLayer} Instance of text layer
      */
     render (container) {

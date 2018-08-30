@@ -7,12 +7,6 @@ import {
     getSymbol
 } from 'muze-utils';
 
-/**
- *
- *
- * @param {*} str
- * @returns
- */
 const checkPath = (str) => {
     if (/^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(str) && /[\dz]$/i.test(str) && str.length > 4) {
         return true;
@@ -20,12 +14,6 @@ const checkPath = (str) => {
     return false;
 };
 
-/**
- *
- *
- * @param {*} d
- * @param {*} elem
- */
 const createShape = function (d, elem) {
     const groupElement = selectElement(elem);
     const { shape, size, update } = d;
@@ -71,7 +59,7 @@ const createShape = function (d, elem) {
  * Draws symbols using d3 symbol api
  * @param {Object} params Contains the svg container, points and other symbol related attributes.
  */
-/* istanbul ignore next */ const drawSymbols = (params) => {
+const drawSymbols = (params) => {
     let mergedGroups;
     const { container, points, transition, className } = params;
     const { duration, effect, disabled } = transition;

@@ -1,8 +1,7 @@
 import { CLASSPREFIX, CONSOLIDATED } from './enums/constants';
 
 /**
- * Returns the default configuration of the visual unit
- * @return {Object} Default configuration of visual unit
+ * Default configuration of the visual unit
  */
 export const defaultConfig = {
     classPrefix: CLASSPREFIX,

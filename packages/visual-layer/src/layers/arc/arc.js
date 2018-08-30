@@ -51,7 +51,7 @@ export default class ArcLayer extends BaseLayer {
     }
 
     /**
-     * returns the default configuration of the layer
+     * Returns the default configuration of the layer
      *
      * @static
      * @return {Object} Default configuration for arc layer
@@ -61,23 +61,10 @@ export default class ArcLayer extends BaseLayer {
         return defaultConfig;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof ArcLayer
-     */
     static formalName () {
         return 'arc';
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof ArcLayer
-     */
     elemType () {
         return 'path';
     }
@@ -85,9 +72,11 @@ export default class ArcLayer extends BaseLayer {
     /**
      * Transforms data in the appropriate data structure to be consumed by the layer for rendering
      *
-     * @param {Object} data data model associated with the layer
+     * @param {DataModel} dataModel data model associated with the layer
      * @param {Object} config configuration of the layer that contains encoding and other parameters
+     *
      * @return {Object} Transformed pie data
+     *
      * @memberof ArcLayer
      */
     getTransformedData (dataModel, config) {
@@ -148,20 +137,15 @@ export default class ArcLayer extends BaseLayer {
      * Returns normalized data after transformation (it is the same in the case of pie layer)
      *
      * @param {Object} data transformed data
+     *
      * @return {Object} normalized data
+     *
      * @memberof ArcLayer
      */
     getNormalizedData (data) {
         return data;
     }
 
-    /**
-     *
-     *
-     * @param {Object} data
-     * @return {}
-     * @memberof ArcLayer
-     */
     calculateDomainFromData (data) {
         const domainKey = OUTER_RADIUS_VALUE;
         return {
@@ -169,14 +153,6 @@ export default class ArcLayer extends BaseLayer {
         };
     }
 
-    /**
-     *
-     *
-     * @param {Object} x
-     * @param {Object} y
-     * @return {}
-     * @memberof ArcLayer
-     */
     getNearestPoint (x, y, config = {}) {
         const dataPoint = config.data;
         if (isSimpleObject(dataPoint)) {
@@ -190,24 +166,10 @@ export default class ArcLayer extends BaseLayer {
         return null;
     }
 
-    /**
-     *
-     *
-     * @param {*} set
-     * @returns
-     * @memberof ArcLayer
-     */
     getPlotElementsFromSet (set) {
         return selectElement(this.mount()).selectAll(this.elemType()).filter(d => set.indexOf(d.datum.uid) !== -1);
     }
 
-    /**
-     *
-     *
-     * @param {Object} container
-     * @return {}
-     * @memberof ArcLayer
-     */
     render (container) {
         const {
             height,

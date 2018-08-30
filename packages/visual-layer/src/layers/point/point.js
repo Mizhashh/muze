@@ -23,53 +23,28 @@ import './styles.scss';
  * @class
  */
 export default class PointLayer extends BaseLayer {
-
-    /**
-     *Creates an instance of PointLayer.
-     * @param {*} args
-     * @memberof PointLayer
-     */
     constructor (...args) {
         super(...args);
         this._voronoi = new Voronoi();
     }
 
-    /**
-     *
-     *
-     * @returns
-     * @memberof PointLayer
-     */
     elemType () {
         return 'g';
     }
 
     /**
-     * Returns the default configuration of the point layer
+     * Returns the default configuration of the point layer.
+     *
      * @return {Object} Default configuration of the point layer
      */
     static defaultConfig () {
         return defaultConfig;
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof PointLayer
-     */
     static formalName () {
         return 'point';
     }
 
-    /**
-     *
-     *
-     * @static
-     * @returns
-     * @memberof PointLayer
-     */
     static drawFn () {
         return drawSymbols;
     }
@@ -158,7 +133,9 @@ export default class PointLayer extends BaseLayer {
 
     /**
      * Renders the plot in the given container
-     * @param  {SVGElement} container SVGElement which will hold the plot
+     *
+     * @param  {SVGElement} container SVGElement which will hold the plot.
+     *
      * @return {BarLayer} Instance of bar layer
      */
     render (container) {
@@ -197,8 +174,10 @@ export default class PointLayer extends BaseLayer {
 
     /**
      * Gets the nearest point from a position.
+     *
      * @param {number} x x position
      * @param {number} y y position
+     *
      * @return {Object} Point details
      */
     getNearestPoint (x, y) {

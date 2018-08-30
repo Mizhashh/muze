@@ -1,13 +1,5 @@
 import { makeElement, easeFns } from 'muze-utils';
 
-/**
- *
- *
- * @param {*} elem
- * @param {*} datum
- * @param {*} index
- * @param {*} context
- */
 const transitionBars = (elem, datum, index, context) => {
     const { transition, classnameFn } = context;
     const { duration, disabled, effect } = transition;
@@ -20,12 +12,6 @@ const transitionBars = (elem, datum, index, context) => {
     Object.entries(updateStyle).forEach(styleObj => selection.style(styleObj[0], styleObj[1]));
 };
 
-/**
- *
- *
- * @param {*} elem
- * @param {*} d
- */
 const barEnterFn = (elem, d) => {
     const selection = elem;
     const enter = d.enter || {};
@@ -34,10 +20,11 @@ const barEnterFn = (elem, d) => {
 
 /**
  * Draws rectangles by using d3 selection
+ *
  * @param  {Object} params Contains container element and points
  * @return {Selection} Bar Selection
  */
-/* istanbul ignore next */ export const drawRects = (params) => {
+export const drawRects = (params) => {
     const { points, container, keyFn } = params;
     const updateFns = {
         enter (elem, d) { barEnterFn(elem, d); },
