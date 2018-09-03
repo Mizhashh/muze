@@ -46,14 +46,13 @@ import './styles.scss';
 const FORMAL_NAME = 'unit';
 
 /**
+ * A hierarchical component of renderer which manages multiple layers. This logical module is responsible for
+ * layouting layers, attach axis with them, resolving conflicts of layers.
+ *
+ * @public
+ * @class
  * @module VisualUnit
- * A hierarchical component of renderer which manages multiple layers. This logical
- * module is responsible for layouting layers, attach axis with them, resolving conflicts of layers.
- */
-
-/**
- * Basic unit implementaiton
- * @class VisualUnit
+ * @namespace Muze
  */
 export default class VisualUnit {
 
@@ -113,6 +112,13 @@ export default class VisualUnit {
         return new this(...params);
     }
 
+    /**
+     * Returns the firebolt instance of visual unit.
+     *
+     * @public
+     *
+     * @return {UnitFirebolt} Instance of firebolt attached with visual unit.
+     */
     firebolt (...firebolt) {
         if (firebolt.length) {
             this._firebolt = firebolt[0];
@@ -184,11 +190,23 @@ export default class VisualUnit {
         return this._renderedPromise;
     }
 
+    /**
+     * Caches the data from next time when `data()` method is called on visual unit.
+     *
+     * @public
+     * @return {VisualUnit} Instance of visual unit.
+     */
     enableCaching () {
         this._cache = true;
         return this;
     }
 
+    /**
+     * Clears the cached data and resets the data.
+     *
+     * @public
+     * @return {VisualUnit} Instance of visual unit.
+     */
     clearCaching () {
         this._cache = false;
         this.cachedData([this.cachedData()[0]]);
@@ -223,6 +241,32 @@ export default class VisualUnit {
         };
     }
 
+    /**
+     * Adds a new layer in the visual unit. It is used when dynamically adding layer on interaction.
+     *
+     * To add a layer on interaction
+     * ```
+     *     const layers = firebolt.context.addLayer({
+     *          name: 'averageLine',
+     *          encoding: {
+     *              y: 'Acceleration'
+     *          }
+     *     });
+     *
+     *     // Then attach data to layers and render them.
+     *     layers.forEach((layer) => {
+     *          layer.data(entryModel).mount(svgGroup);
+     *     });
+     *
+     * ```
+     *
+     * @public
+     *
+     * @param {Object} layerDef Definition of the layer.
+     *
+     * @return {Array} Instances of the new layer. If it is a composite layer then it returns the instances of each
+     * atomic layer.
+     */
     addLayer (layerDef) {
         const layerName = layerDef.name;
         const layer = this.getLayerByName(layerName);
@@ -290,11 +334,29 @@ export default class VisualUnit {
         return [`.${classPrefix}-${defClassName}`, `.${classPrefix}-${arcLayerClassName} path`];
     }
 
+    /**
+     * Returns the layer instances which matches the given mark type.
+     *
+     * @public
+     *
+     * @param {string} type mark type of layer.
+     *
+     * @return {Array} Array of layer instances.
+     */
     getLayersByType (type) {
         const layers = getLayersBy(this.layers(), 'type', type);
         return layers;
     }
 
+    /**
+     * Returns the layer instance which matches the given alias.
+     *
+     * @public
+     *
+     * @param {string} name alias of layer.
+     *
+     * @return {BaseLayer} Instance of layer.
+     */
     getLayerByName (name) {
         const layers = getLayersBy(this.layers(), 'name', name);
         return layers[0];
@@ -345,12 +407,20 @@ export default class VisualUnit {
     }
 
     /**
-     * Finds the nearest point closest to the x and y position.
+     * Returns the nearest point closest to the x and y position. The nearest point contains the identifiers of the
+     * nearest data point.
      *
+     * @public
      * @param {number} x x position.
      * @param {number} y y position.
-     *
+     * @param {Object} args Configuration for getting the nearest point.
+     * @param {boolean} getAllPoints get all points nearest to the x axis value or y axis value.
      * @return {Object} Nearest point.
+     * ```
+     *     {
+     *          id: // Identifiers of the nearest data point [['Origin'], ['USA']]
+     *     }
+     * ```
      */
     getNearestPoint (x, y, args) {
         let pointObj = {
@@ -395,6 +465,39 @@ export default class VisualUnit {
         return point;
     }
 
+    /**
+     * Get information like x, y, width, height of each mark which is retrieved from the identifiers.
+     *
+     * @public
+     *
+     * @param {Object|Array} identifiers Unique identifiers like dimensional values.
+     * @param {Object} config Configuration which specifies how to retrieve the information.
+     * @param {boolean} config.getBBox If true, then returns the bounding box of each mark in the object.
+     * @param {boolean} config.getAllAttrs If true then returns all the attributes of the mark like enter, update and
+     * if false, then only returns the x, y, width and height of each mark.
+     *
+     * @return {Array} Array of objects containing the position of every mark retrieved from the given identifiers.
+     * ```
+     *      [
+     *          {
+     *              // Enter attributes of each mark.
+     *              enter: {
+     *                  x: // x position
+     *                  y: // y position
+     *                  width: // width
+     *                  height: // height of mark if exists
+     *              },
+     *              // Update attributes of each mark.
+     *              update: {
+     *                  x: // x position
+     *                  y: // y position
+     *                  width: // width
+     *                  height: // height of mark if exists
+     *              }
+     *          }
+     *      ]
+     * ```
+     */
     getPlotPointsFromIdentifiers (identifiers, config = {}) {
         let points = [];
         let parsedIdentifiers = identifiers;
@@ -416,11 +519,29 @@ export default class VisualUnit {
         return points;
     }
 
+    /**
+     * Removes the layer instance which matches the given alias.
+     *
+     * @public
+     *
+     * @param {string} name alias of layer.
+     *
+     * @return {VisualUnit} Instance of visual unit.
+     */
     removeLayerByName (name) {
         removeLayersBy('name', name);
         return this;
     }
 
+    /**
+     * Returns the layer instances which matches the given mark type.
+     *
+     * @public
+     *
+     * @param {string} type mark type of layer.
+     *
+     * @return {VisualUnit} Instance of visual unit.
+     */
     removeLayersByType (type) {
         removeLayersBy('type', type);
         return this;

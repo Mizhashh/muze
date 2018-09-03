@@ -4,14 +4,14 @@ import {
 /* eslint-disable guard-for-in */
 
 /**
- * This component is used to keep track of the row tuples of the data which gets added and removed.
- * @class SelectionSet
+ * This component is used to keep track of the row tuples of the data which gets added and removed. It creates a hashmap
+ * which has key as the row id and a value which represents if the row tuple is added or removed.
+ *
+ * @public
+ * @class
+ * @namespace Muze
  */
 class SelectionSet {
-    /**
-     * Creates an instance of selection set
-     * @param {Array.<string>} completeSet Set of unique ids.
-     */
     constructor (completeSet, _volatile) {
         this.completeSet = completeSet;
         this._set = completeSet.reduce((obj, key) => {
@@ -25,8 +25,12 @@ class SelectionSet {
     }
 
     /**
-     * Adds a set of ids to the selection set.
+     * Marks row ids in the hashmap as added. The row ids which are not in the added set are marked as removed.
+     *
+     * @public
+     *
      * @param {Array.<number|string>} ids Array of unique ids
+     *
      * @return {SelectionSet} Instance of selection set.
      */
     add (ids) {
@@ -48,6 +52,7 @@ class SelectionSet {
 
     /**
      * Adds a set of ids to the selection set.
+     *
      * @param {Array.<number|string>} ids Array of unique ids
      * @return {SelectionSet} Instance of selection set.
      */
@@ -63,7 +68,9 @@ class SelectionSet {
 
     /**
      * Adds a set of ids to the selection set.
-     * @param {Array.<number|string>} ids Array of unique ids
+     *
+     * @param {Array.<number|string>} ids Array of unique ids.
+     *
      * @return {SelectionSet} Instance of selection set.
      */
     updateEntry () {
@@ -78,7 +85,9 @@ class SelectionSet {
 
     /**
      * Adds a set of ids to the selection set.
-     * @param {Array.<number|string>} ids Array of unique ids
+     *
+     * @param {Array.<number|string>} ids Array of unique ids.
+     *
      * @return {SelectionSet} Instance of selection set.
      */
     updateExit () {
@@ -91,8 +100,12 @@ class SelectionSet {
     }
 
     /**
-     * Removes the ids from the selection set.
+     * Marks row ids in the hashmap as removed. The row ids which are not in the removed set are marked as added.
+     *
+     * @public
+     *
      * @param {Array.<string>} ids Array of unique ids
+     *
      * @return {SelectionSet}  Instance of selection set
      */
     remove (ids) {
@@ -112,6 +125,21 @@ class SelectionSet {
         return this;
     }
 
+    /**
+     * Returns entry, exit and complete set. Entry set contains the old ids which were added previously and the new ids
+     * which are added currently. It is same for exit set also. Complete set contains all the row ids from the set.
+     *
+     * @public
+     *
+     * @return {Object} Entry set, exit set and complete set.
+     * ```
+     *      {
+     *          entrySet: [ // oldEntrySet, // newEntrySet ],
+     *          exitSet:  [ // oldExitSet, // newExitSet ],
+     *          completeSet: // All the row ids present in the set.
+     *      }
+     * ```
+     */
     getSets () {
         const set = this._set;
         const retObj = {
@@ -140,8 +168,12 @@ class SelectionSet {
     }
 
     /**
-     * Resets the selection set to initial state. It sets the value of every unique id value to
-     * null in the selection set.
+     * Resets all the row ids in the set to null which means no row ids are in entry set or exit set.
+     *
+     * @public
+     *
+     * @param {Array} ids Array of unique row ids.
+     *
      * @return {SelectionSet} Instance of selection set.
      */
     reset (ids) {
@@ -178,19 +210,27 @@ class SelectionSet {
     }
 
     /**
-     * Returns a set of unique ids which are already present in entry set
-     * @param {Array} addSet Array of unique ids which are added
+     * Accepts an array of unique ids and returns those which are already present in entry set.
+     *
+     * @param {Array} uids Array of unique row ids.
      *
      * @return {Array} Array of unique ids which are already in old entry set or new entry set
      */
-    getExistingEntrySet (addSet) {
+    getExistingEntrySet (uids) {
         const set = this._set;
-        return addSet.filter(d => set[d] === SELECTION_NEW_ENTRY || set[d] === SELECTION_OLD_ENTRY);
+        return uids.filter(d => set[d] === SELECTION_NEW_ENTRY || set[d] === SELECTION_OLD_ENTRY);
     }
 
-    getExistingExitSet (removeSet) {
+    /**
+     * Accepts an array of unique ids and returns those which are already present in exit set.
+     *
+     * @param {Array} uids Array of unique row ids.
+     *
+     * @return {Array} Array of unique ids which are already in old exit set or new exit set
+     */
+    getExistingExitSet (uids) {
         const set = this._set;
-        return removeSet.filter(d => set[d] === SELECTION_NEW_EXIT || set[d] === SELECTION_OLD_EXIT);
+        return uids.filter(d => set[d] === SELECTION_NEW_EXIT || set[d] === SELECTION_OLD_EXIT);
     }
 
     /**
@@ -257,6 +297,7 @@ class SelectionSet {
 
     /**
      * Swaps the add set and remove set in the selection set.
+     *
      * @return {SelectionSet} Instance of selection set.
      */
     toggle () {

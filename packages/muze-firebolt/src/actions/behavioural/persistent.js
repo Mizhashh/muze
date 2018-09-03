@@ -2,6 +2,15 @@ import GenericBehaviour from './generic';
 import { getMergedSet } from '../../helper';
 import * as SELECTION from '../../enums/selection';
 
+/**
+ * Abstract class which retains the previous selected tuples in the selection set. Any behavioural action can extend
+ * this class to get the persistent behaviour.
+ *
+ * @public
+ * @class
+ * @extends GenericBehaviour
+ * @namespace Muze
+ */
 export default class PersistentBehaviour extends GenericBehaviour {
     setSelectionSet (addSet, selectionSet) {
         if (addSet === null) {

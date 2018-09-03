@@ -12,7 +12,7 @@ export default class SelectBehaviour extends PersistentBehaviour {
             // new add set
             const existingRemoveSet = addSet.filter(d => selectionSet._set[d] === SELECTION.SELECTION_OLD_EXIT
                 || selectionSet._set[d] === SELECTION.SELECTION_NEW_EXIT);
-                // existing add set
+            // existing add set
             if (existingRemoveSet.length) {
                 selectionSet.updateEntry();
                 selectionSet.add(existingRemoveSet);

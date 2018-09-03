@@ -16,8 +16,14 @@ import {
 } from './helper';
 
 /**
- * Relient firebolt is responsible for dispatching behaviours. It has only behaviours which can be
- * dispatched without any physical action being triggered.
+ * This class is used to manage the interactions of chart components like visual unit, legend, etc. This is initialized
+ * by the components which needs to manage it's interactions. It stores the physical and behavioural actions and the
+ * side effects. It also has the mapping between the physical and behavioural actions and behavioural actions and side
+ * effects.
+ *
+ * @public
+ * @class
+ * @namespace Muze
  */
 export default class Firebolt {
     constructor (context, actions, sideEffects, behaviourEffectMap) {
@@ -271,6 +277,20 @@ export default class Firebolt {
         return this;
     }
 
+    /**
+     * Sets the fields by which the propagation data will be prepared for any action.
+     *
+     * ```
+     *  firebolt.propagateWith('highlight', 'Origin', 'Year');
+     * ```
+     *
+     * @public
+     *
+     * @param {string} action Name of the behavioural action.
+     * @param  {string} fields Field names of the propagation data model.
+     *
+     * @return {Firebolt} Instance of firebolt.
+     */
     propagateWith (action, ...fields) {
         if (fields.length) {
             this._propagationFields[action] = fields;
@@ -281,6 +301,7 @@ export default class Firebolt {
 
     /**
      * Map actions and behaviours
+     *
      * @return {Firebolt} Firebolt instance
      */
     mapActionsAndBehaviour () {
@@ -339,6 +360,24 @@ export default class Firebolt {
         return this._propagationInf;
     }
 
+    /**
+     * Gets the ids of the tuples from selection criteria.
+     *
+     * @public
+     *
+     * @param {Object | Array} criteria Selection criteria
+     * @param {Object} propagationInf Propagation information.
+     * @param {DataModel} propagationInf.data propagation data model.
+     * @param {string} propagationInf.sourceId id of the component from where the propagation was initiated.
+     *
+     * @return {Object} Selection data model and ids of the selected tuples.
+     * ```
+     *   {
+     *      model: // Selection data model instance
+     *      uids: // Unique ids of the selected row tuples.
+     *   }
+     * ```
+     */
     getAddSetFromCriteria (criteria, propagationInf = {}) {
         const context = this.context;
         const filteredDataModel = propagationInf.data ? propagationInf.data :
@@ -354,6 +393,15 @@ export default class Firebolt {
         };
     }
 
+    /**
+     * Get the instances of selection set corresponding to a particular behavioural action.
+     *
+     * @public
+     *
+     * @param {string} action Name of the behavioural action.
+     *
+     * @return { Array } Array of selection sets.
+     */
     getSelectionSets (action) {
         const sourceId = this.context.id();
         const propagationInf = this._propagationInf || {};

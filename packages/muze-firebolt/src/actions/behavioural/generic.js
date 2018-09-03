@@ -1,5 +1,31 @@
 import { getSetInfo, getMergedSet, getSourceFields } from '../../helper';
 
+/**
+ * Abstract class which provides common functionalities for all behavioural actions like
+ *  - Creating entry exit set based on criteria
+ *  - Enabling behavioural action
+ *  - Disabling behavioural action
+ *
+ * Any new behavioural action must extend this class.
+ *
+ * To create a new behavioural action,
+ *  ```
+ *      class SingleSelectBehaviour extends GenericBehaviour {
+ *          // Every behavioural action must declare a formal name for identifying it.
+ *          static formalName () {
+ *              return 'singleSelect';
+ *          }
+ *
+ *          setSelectionSet () {
+ *
+ *          }
+ *      }
+ *  ```
+ *
+ * @public
+ * @class
+ * @namespace Muze
+ */
 export default class GenericBehaviour {
     constructor (firebolt) {
         this.firebolt = firebolt;
@@ -23,6 +49,17 @@ export default class GenericBehaviour {
         return entryExitSets;
     }
 
+    /**
+     * Adds or removes row ids from the {@link SelectionSet}. It decides if the row ids should be added or removed
+     * from the {@link SelectionSet} and when the {@link SelectionSet} should be resetted.
+     *
+     * @public
+     *
+     * @param {Array} uids Array of unique row ids which were selected during interaction.
+     * @param {SelectionSet} selectionSet Instance of {@link SelectionSet}.
+     *
+     * @return {GenericBehaviour} Instance of behavioural aciton.
+     */
     setSelectionSet () {
         return this;
     }
@@ -57,6 +94,14 @@ export default class GenericBehaviour {
         };
     }
 
+    /**
+     * Returns a boolean value if the behavioural action has any mutating effect like if it changes the data of the
+     * visualization.
+     *
+     * @public
+     *
+     * @return {boolean} If the action mutates the data.
+     */
     static mutates () {
         return false;
     }

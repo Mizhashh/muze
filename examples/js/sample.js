@@ -3,8 +3,8 @@
 (function () {
     let env = muze();
     let DataModel = muze.DataModel,
-        share = muze.operators.share,
-        html = muze.operators.html,
+        share = muze.Operators.share,
+        html = muze.Operators.html,
         actionModel = muze.ActionModel;
     const SpawnableSideEffect = muze.SideEffects.SpawnableSideEffect;
 
@@ -60,49 +60,37 @@
             ];
         let rootData = new DataModel(jsonData, schema);
 
-        // rootData = rootData.groupBy(['Year'], {
-        //     Horsepower: 'mean',
-        //     Acceleration: 'mean'
-        // });
-
         env = env.data(rootData).minUnitHeight(40).minUnitWidth(40);
         let mountPoint = document.getElementById('chart');
         window.canvas = env.canvas();
         let rows = ['Acceleration'],
             columns = ['Displacement'];
-        // rootData = rootData.groupBy(['Maker']);
-        // rootData = rootData.sort([['Acceleration', 'ASC']]);
-        canvas = canvas
-            .rows(rows)
-            .columns(columns)
-            .data(rootData)
-            .width(1200)
-            .height(800)
-            .detail(['Maker'])
-            .color('Origin')
-            .layers([{
-                mark: 'point'
-            }])
-            .config({
-                groupBy: {
-                    disabled: true
-                },
-                border: {
-                    width: 2,
-                },
-                axes: {
-                    x: {
-                        showAxisName: true,
-                        axisNamePadding: 20,
-                    }, y: {
-                        showAxisName: true,
-                        axisNamePadding: 20,
-                    }
-                }
-            })
-            .title('The Muze Project', { position: "top", align: "left", })
-            .subtitle('Composable visualisations with a data first approach', { position: "top", align: "left" })
-            .mount(document.getElementsByTagName('body')[0]);
+        const dataModelInstance = new DataModel(jsonData, schema);
+        canvas
+    		.rows(['Miles_per_Gallon'])
+			.columns(['Year'])
+          	.width(600)
+          	.height(400)
+			.data(dataModelInstance)
+    		.transform({ transformedData: (dt) =>
+                        dt.groupBy([''],{ Miles_per_Gallon: 'avg' })})
+			.layers([{
+					mark: 'bar',
+			}, {
+					mark: 'tick',
+					source: 'transformedData',
+					encoding: {
+                      		x: {
+                              field: null
+                            },
+							y: 'Miles_per_Gallon'
+					},
+					color: {
+							value: () => 'red' /* To differentiate the line */
+					},
+					calculateDomain : false  /* Don't need to caluclate the domain*/
+			}])
+    		.mount(mountPoint)/* Attaching the canvas to DOM element */
     })
 
 })()

@@ -5,8 +5,19 @@ import { payloadGenerator } from './payload-generator';
 import { propagateValues } from './data-propagator';
 
 /**
- * This class manages the interactions of visual unit. It associates physical actions with
- * behavioural actions. It also propagates the behavioural actions to other datamodels.
+ * This class manages the interactions of visual unit. It associates physical actions with behavioural actions.
+ * It also propagates the selection data created on any behavioural action triggering to other datamodels.
+ *
+ * To get the firebolt instance of visual unit -
+ * ```
+ *  // Get the value matrices of visual group where the visual units gets stored.
+ *  const valueMatrix = canvas.composition().visualGroup.composition().matrices.value;
+ *  const matrixArray = valueMatrix.getMatrixArray();
+ *  const firebolt = matrixArray[0][0].valueOf().firebolt();
+ * ```
+ *
+ * @public
+ * @namespace Muze
  */
 export default class UnitFireBolt extends Firebolt {
     constructor (...params) {

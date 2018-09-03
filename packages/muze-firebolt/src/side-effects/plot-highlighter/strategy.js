@@ -7,10 +7,10 @@ const fadeFn = (set, context, strategy) => {
     } = set;
 
     if (!mergedEnter.length && !mergedExit.length) {
-        context.applyInteractionStyle(completeSet, {}, strategy, false);
+        context.applyInteractionStyle(completeSet, strategy, false);
     } else {
-        context.applyInteractionStyle(exitSet[1], {}, strategy, true);
-        context.applyInteractionStyle(mergedEnter, {}, strategy, false);
+        context.applyInteractionStyle(exitSet[1], strategy, true);
+        context.applyInteractionStyle(mergedEnter, strategy, false);
     }
 };
 
@@ -23,10 +23,10 @@ export const strategies = {
             completeSet
         } = set;
         if (!mergedEnter.length && !mergedExit.length) {
-            context.applyInteractionStyle(completeSet, {}, 'focus', false);
+            context.applyInteractionStyle(completeSet, 'focus', false);
         } else {
-            context.applyInteractionStyle(mergedExit, {}, 'focus', true);
-            context.applyInteractionStyle(mergedEnter, {}, 'focus', false);
+            context.applyInteractionStyle(mergedExit, 'focus', true);
+            context.applyInteractionStyle(mergedEnter, 'focus', false);
         }
     },
     highlight: (set, context) => {
@@ -38,10 +38,10 @@ export const strategies = {
             completeSet
         } = set;
         if (!mergedEnter.length && !mergedExit.length) {
-            context.applyInteractionStyle(completeSet, {}, 'highlight', false);
+            context.applyInteractionStyle(completeSet, 'highlight', false);
         } else {
-            context.applyInteractionStyle(entrySet[1], {}, 'highlight', true);
-            context.applyInteractionStyle(exitSet[1], {}, 'highlight', false);
+            context.applyInteractionStyle(entrySet[1], 'highlight', true);
+            context.applyInteractionStyle(exitSet[1], 'highlight', false);
         }
     }
 };
